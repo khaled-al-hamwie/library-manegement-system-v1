@@ -1,0 +1,5 @@
+idea :
+library manegement system to manage books 
+features :
+- the ability to buy or reserve a book
+- the ability for the stuff to manage the library 

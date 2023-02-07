@@ -1,0 +1,8 @@
+{
+    "ext": "js json ts html css",
+    "delay": 1000,
+    "events": {
+        "start": "echo listening at port __4000__ on the url '\\e[1;31m'http://localhost:4000'\\e[0m'",
+        "restart": "clear ; echo The App Has Been '\\e[1;33m'Restarted'\\e[0m' at'\\e[1;34m' $(date \"+%I:%M:%S\") '\\e[0m' "
+    }
+}
