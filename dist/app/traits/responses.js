@@ -23,6 +23,17 @@ class HttpResponse {
             errors: errors,
         });
     }
+    static notFound(res, name, value) {
+        return res.status(404).json({
+            message: httpMessage_1.default.notFound(),
+            errors: `the ${name} with the id = ${value} doesn't exists`,
+        });
+    }
+    static ok(res) {
+        return res.json({
+            message: "done",
+        });
+    }
     static fetch(res, result) {
         return res.status(200).json({
             message: httpMessage_1.default.fetch(),
