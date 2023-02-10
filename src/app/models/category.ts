@@ -1,6 +1,11 @@
 // import inflection from "inflection";
-import sequelize, { DataTypes, Model, Sequelize } from "sequelize";
-
+import {
+    DataTypes,
+    InferCreationAttributes,
+    Model,
+    Sequelize,
+} from "sequelize";
+import sequelize from "../providers/databaseProvider";
 export const name: string = "Category";
 export const attr = {
     category_id: {
@@ -19,13 +24,14 @@ export const attr = {
     },
 };
 
-export const Category = (sequelize: Sequelize) => {
-    class Category extends Model {}
-    Category.init(attr, {
-        sequelize,
-        tableName: "Publisher",
-        timestamps: false,
-        modelName: "Publisher",
-    });
-    return Category;
-};
+export class Category extends Model<any, InferCreationAttributes<Category>> {
+    declare name: string;
+    declare description: string;
+}
+
+Category.init(attr, {
+    sequelize,
+    tableName: "Category",
+    timestamps: false,
+    modelName: "Category",
+});

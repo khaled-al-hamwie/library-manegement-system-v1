@@ -1,8 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Category = exports.attr = exports.name = void 0;
 // import inflection from "inflection";
 const sequelize_1 = require("sequelize");
+const databaseProvider_1 = __importDefault(require("../providers/databaseProvider"));
 exports.name = "Category";
 exports.attr = {
     category_id: {
@@ -20,15 +24,12 @@ exports.attr = {
         allowNull: true,
     },
 };
-const Category = (sequelize) => {
-    class Category extends sequelize_1.Model {
-    }
-    Category.init(exports.attr, {
-        sequelize,
-        tableName: "Publisher",
-        timestamps: false,
-        modelName: "Publisher",
-    });
-    return Category;
-};
+class Category extends sequelize_1.Model {
+}
 exports.Category = Category;
+Category.init(exports.attr, {
+    sequelize: databaseProvider_1.default,
+    tableName: "Category",
+    timestamps: false,
+    modelName: "Category",
+});
