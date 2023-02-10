@@ -79,9 +79,9 @@ const Book = (sequelize) => {
     }
     Book.init(Object.assign(Object.assign({}, exports.attr), { status_id: exports.status.attr }), {
         sequelize,
-        tableName: "Publisher",
+        tableName: "Book",
         timestamps: false,
-        modelName: "Publisher",
+        modelName: "Book",
     });
     return Book;
 };

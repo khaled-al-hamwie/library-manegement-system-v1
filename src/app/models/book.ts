@@ -84,9 +84,9 @@ export const Book = (sequelize: Sequelize) => {
         { ...attr, status_id: status.attr },
         {
             sequelize,
-            tableName: "Publisher",
+            tableName: "Book",
             timestamps: false,
-            modelName: "Publisher",
+            modelName: "Book",
         }
     );
     return Book;
