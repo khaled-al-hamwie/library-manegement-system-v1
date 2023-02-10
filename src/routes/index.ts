@@ -5,6 +5,6 @@ const app = express();
 app.use(router);
 
 sequelize
-    .sync()
+    .sync({ logging: false })
     .then(() => app.listen(process.env.PORT))
     .catch(console.error);

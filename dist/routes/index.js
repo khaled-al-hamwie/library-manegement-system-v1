@@ -9,6 +9,6 @@ const app_1 = __importDefault(require("./app"));
 const app = (0, express_1.default)();
 app.use(app_1.default);
 databaseProvider_1.default
-    .sync()
+    .sync({ logging: false })
     .then(() => app.listen(process.env.PORT))
     .catch(console.error);
