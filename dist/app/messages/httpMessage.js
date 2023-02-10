@@ -11,6 +11,9 @@ class httpMessage {
     static server() {
         return "server error";
     }
+    static notFound() {
+        return "not found error";
+    }
     static fetch() {
         return "your data has been fetched successfully";
     }

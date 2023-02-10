@@ -9,6 +9,9 @@ class httpMessage {
     static server(): string {
         return "server error";
     }
+    static notFound(): string {
+        return "not found error";
+    }
     static fetch(): string {
         return "your data has been fetched successfully";
     }
