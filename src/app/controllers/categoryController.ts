@@ -28,10 +28,6 @@ class CategoryController {
         res: Response,
         next: NextFunction
     ) {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return HttpResponse.validation(res, errors.array());
-        }
         await Category.create({
             name: req.body.name,
             description: req.body.description,
@@ -44,9 +40,13 @@ class CategoryController {
         await Category.findByPk(req.params.id)
             .then((results) => {
                 if (results == null) {
-                    HttpResponse.notFound(res, "category", req.params.id);
+                    return HttpResponse.notFound(
+                        res,
+                        "category",
+                        req.params.id
+                    );
                 }
-                HttpResponse.fetch(res, results);
+                return HttpResponse.fetch(res, results);
             })
             .catch((errors) => HttpResponse.server(res, errors));
     }
@@ -56,10 +56,10 @@ class CategoryController {
         res: Response,
         next: NextFunction
     ): Promise<Response> {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return HttpResponse.validation(res, errors.array());
-        }
+        // const errors = validationResult(req);
+        // if (!errors.isEmpty()) {
+        //     return HttpResponse.validation(res, errors.array());
+        // }
         const id: string = req.params.id;
         const name: string = req.body.name;
         const description: string = req.body.description;
