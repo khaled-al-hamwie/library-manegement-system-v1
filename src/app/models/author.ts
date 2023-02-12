@@ -1,4 +1,11 @@
-import sequelize, { DataTypes, Model, Sequelize } from "sequelize";
+import {
+    CreationOptional,
+    DataTypes,
+    InferCreationAttributes,
+    Model,
+    Sequelize,
+} from "sequelize";
+import sequelize from "../providers/databaseProvider";
 
 export const name: string = "Author";
 export const attr = {
@@ -14,18 +21,18 @@ export const attr = {
     },
     description: {
         type: DataTypes.STRING(245),
-        allowNull: true,
     },
     born: DataTypes.DATE,
 };
 
-export const Author = (sequelize: Sequelize) => {
-    class Author extends Model {}
-    Author.init(attr, {
-        sequelize,
-        tableName: "Author",
-        timestamps: false,
-        modelName: "Author",
-    });
-    return Author;
-};
+export class Author extends Model<any, InferCreationAttributes<Author>> {
+    declare name: string;
+    declare description: CreationOptional<string>;
+    declare born: CreationOptional<Date>;
+}
+Author.init(attr, {
+    sequelize,
+    tableName: "Author",
+    timestamps: false,
+    modelName: "Author",
+});
