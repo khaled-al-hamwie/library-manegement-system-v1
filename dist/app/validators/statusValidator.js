@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.statusValidatorU = exports.statusValidatorC = void 0;
-const name_1 = require("../schemas/name");
+const string_1 = require("../schemas/string");
 function statusValidatorC() {
-    return [...name_1.name];
+    return [...(0, string_1.string)("name")];
 }
 exports.statusValidatorC = statusValidatorC;
 function statusValidatorU() {
-    return [...name_1.nameO];
+    return [...(0, string_1.stringO)("name")];
 }
 exports.statusValidatorU = statusValidatorU;

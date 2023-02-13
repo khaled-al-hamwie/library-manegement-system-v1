@@ -1,9 +1,9 @@
-import { name, nameO } from "../schemas/name";
+import { string, stringO } from "../schemas/string";
 
 export function statusValidatorC() {
-    return [...name];
+    return [...string("name")];
 }
 
 export function statusValidatorU() {
-    return [...nameO];
+    return [...stringO("name")];
 }

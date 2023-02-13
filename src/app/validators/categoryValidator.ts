@@ -1,10 +1,9 @@
-import { description, descriptionO } from "../schemas/description";
-import { name, nameO } from "../schemas/name";
+import { string, stringO } from "../schemas/string";
 
 export function categoryValidatorC() {
-    return [...name, ...description];
+    return [...string("name"), ...string("description", true)];
 }
 
 export function categoryValidatorU() {
-    return [...nameO, ...descriptionO];
+    return [...stringO("name"), ...stringO("description", true)];
 }

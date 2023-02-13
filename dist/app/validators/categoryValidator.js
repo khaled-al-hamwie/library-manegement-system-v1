@@ -1,13 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.categoryValidatorU = exports.categoryValidatorC = void 0;
-const description_1 = require("../schemas/description");
-const name_1 = require("../schemas/name");
+const string_1 = require("../schemas/string");
 function categoryValidatorC() {
-    return [...name_1.name, ...description_1.description];
+    return [...(0, string_1.string)("name"), ...(0, string_1.string)("description", true)];
 }
 exports.categoryValidatorC = categoryValidatorC;
 function categoryValidatorU() {
-    return [...name_1.nameO, ...description_1.descriptionO];
+    return [...(0, string_1.stringO)("name"), ...(0, string_1.stringO)("description", true)];
 }
 exports.categoryValidatorU = categoryValidatorU;
