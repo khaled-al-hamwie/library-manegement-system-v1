@@ -8,12 +8,14 @@ const express_validator_1 = require("express-validator");
 const validationMessage_1 = __importDefault(require("../messages/validationMessage"));
 exports.year_of_publish = [
     (0, express_validator_1.body)("year_of_publish")
+        .trim()
         .isDate()
         .withMessage(validationMessage_1.default.type("date")),
 ];
 exports.year_of_publishO = [
     (0, express_validator_1.body)("year_of_publish")
         .optional()
+        .trim()
         .isDate()
         .withMessage(validationMessage_1.default.type("date")),
 ];
