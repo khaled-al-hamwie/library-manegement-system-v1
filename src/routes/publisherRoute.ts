@@ -9,7 +9,7 @@ import {
 const publisherRouter: Router = Router();
 
 publisherRouter
-    .route("/category")
+    .route("/publisher")
     .get(PublisherController.getPublisher)
     .post(
         publisherValidatorC(),
@@ -17,7 +17,7 @@ publisherRouter
         PublisherController.createPublisher
     );
 publisherRouter
-    .route("/category/:id")
+    .route("/publisher/:id")
     .all([...id], validationHandler)
     .get(PublisherController.showPublisher)
     .patch(

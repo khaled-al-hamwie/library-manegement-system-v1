@@ -10,11 +10,11 @@ const id_1 = require("../app/schemas/id");
 const publisherValidator_1 = require("../app/validators/publisherValidator");
 const publisherRouter = (0, express_1.Router)();
 publisherRouter
-    .route("/category")
+    .route("/publisher")
     .get(publisherController_1.default.getPublisher)
     .post((0, publisherValidator_1.publisherValidatorC)(), validationHandler_1.validationHandler, publisherController_1.default.createPublisher);
 publisherRouter
-    .route("/category/:id")
+    .route("/publisher/:id")
     .all([...id_1.id], validationHandler_1.validationHandler)
     .get(publisherController_1.default.showPublisher)
     .patch((0, publisherValidator_1.publisherValidatorU)(), validationHandler_1.validationHandler, publisherController_1.default.updatePublisher)
