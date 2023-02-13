@@ -28,7 +28,7 @@ class PublisherController {
     ) {
         Publisher.create({
             name: req.body.name,
-            year_of_publish: req.body.year_of_publish,
+            publishing_date: req.body.publishing_date,
         })
             .then((results) => HttpResponse.creation(res, results, "publisher"))
             .catch((errors) => HttpResponse.server(res, errors));
@@ -56,12 +56,12 @@ class PublisherController {
     ) {
         const id = req.params.id;
         const name: string = req.body.name;
-        const year_of_publish = req.body.year_of_publish;
+        const publishing_date = req.body.publishing_date;
         const publisher = await Publisher.findByPk(id);
         if (publisher) {
             if (name) publisher.set("name", name);
-            if (year_of_publish)
-                publisher.set("year_of_publish", year_of_publish);
+            if (publishing_date)
+                publisher.set("publishing_date", publishing_date);
             await publisher.save();
             return HttpResponse.ok(res);
         }

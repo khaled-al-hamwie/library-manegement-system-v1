@@ -31,7 +31,7 @@ class PublisherController {
         return __awaiter(this, void 0, void 0, function* () {
             publisher_1.Publisher.create({
                 name: req.body.name,
-                year_of_publish: req.body.year_of_publish,
+                publishing_date: req.body.publishing_date,
             })
                 .then((results) => responses_1.default.creation(res, results, "publisher"))
                 .catch((errors) => responses_1.default.server(res, errors));
@@ -53,13 +53,13 @@ class PublisherController {
         return __awaiter(this, void 0, void 0, function* () {
             const id = req.params.id;
             const name = req.body.name;
-            const year_of_publish = req.body.year_of_publish;
+            const publishing_date = req.body.publishing_date;
             const publisher = yield publisher_1.Publisher.findByPk(id);
             if (publisher) {
                 if (name)
                     publisher.set("name", name);
-                if (year_of_publish)
-                    publisher.set("year_of_publish", year_of_publish);
+                if (publishing_date)
+                    publisher.set("publishing_date", publishing_date);
                 yield publisher.save();
                 return responses_1.default.ok(res);
             }
