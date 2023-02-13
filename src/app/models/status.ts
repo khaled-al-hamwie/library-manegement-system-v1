@@ -1,5 +1,10 @@
-import sequelize, { DataTypes, Model, Sequelize } from "sequelize";
-
+import {
+    DataTypes,
+    InferCreationAttributes,
+    Model,
+    Sequelize,
+} from "sequelize";
+import sequelize from "../providers/databaseProvider";
 export const name: string = "Status";
 export const attr = {
     status_id: {
@@ -14,13 +19,12 @@ export const attr = {
     },
 };
 
-export const Status = (sequelize: Sequelize) => {
-    class Status extends Model {}
-    Status.init(attr, {
-        sequelize,
-        tableName: "Status",
-        timestamps: false,
-        modelName: "Status",
-    });
-    return Status;
-};
+export class Status extends Model<any, InferCreationAttributes<Status>> {
+    declare name: string;
+}
+Status.init(attr, {
+    sequelize,
+    tableName: "Status",
+    timestamps: false,
+    modelName: "Status",
+});
