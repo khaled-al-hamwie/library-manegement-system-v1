@@ -1,5 +1,12 @@
 // import inflection from "inflection";
-import sequelize, { DataTypes, Model, Sequelize } from "sequelize";
+import {
+    DataTypes,
+    DateOnlyDataType,
+    InferCreationAttributes,
+    Model,
+    Sequelize,
+} from "sequelize";
+import sequelize from "../providers/databaseProvider";
 
 export const name: string = "Publisher";
 export const attr = {
@@ -19,13 +26,13 @@ export const attr = {
     },
 };
 
-export const Publisher = (sequelize: Sequelize) => {
-    class Product extends Model {}
-    Product.init(attr, {
-        sequelize,
-        tableName: "Publisher",
-        timestamps: false,
-        modelName: "Publisher",
-    });
-    return Product;
-};
+export class Publisher extends Model<any, InferCreationAttributes<Publisher>> {
+    declare name: string;
+    declare year_of_publish: DateOnlyDataType;
+}
+Publisher.init(attr, {
+    sequelize,
+    tableName: "Publisher",
+    timestamps: false,
+    modelName: "Publisher",
+});
