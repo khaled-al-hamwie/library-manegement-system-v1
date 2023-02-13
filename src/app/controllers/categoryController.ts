@@ -56,10 +56,6 @@ class CategoryController {
         res: Response,
         next: NextFunction
     ): Promise<Response> {
-        // const errors = validationResult(req);
-        // if (!errors.isEmpty()) {
-        //     return HttpResponse.validation(res, errors.array());
-        // }
         const id: string = req.params.id;
         const name: string = req.body.name;
         const description: string = req.body.description;

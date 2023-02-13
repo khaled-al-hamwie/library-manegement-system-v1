@@ -52,10 +52,6 @@ class CategoryController {
     }
     static updateCategory(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            // const errors = validationResult(req);
-            // if (!errors.isEmpty()) {
-            //     return HttpResponse.validation(res, errors.array());
-            // }
             const id = req.params.id;
             const name = req.body.name;
             const description = req.body.description;
