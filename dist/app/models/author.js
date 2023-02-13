@@ -21,7 +21,7 @@ exports.attr = {
     description: {
         type: sequelize_1.DataTypes.STRING(245),
     },
-    born: sequelize_1.DataTypes.DATE,
+    born: sequelize_1.DataTypes.DATEONLY,
 };
 class Author extends sequelize_1.Model {
 }

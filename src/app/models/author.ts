@@ -1,6 +1,7 @@
 import {
     CreationOptional,
     DataTypes,
+    DateOnlyDataType,
     InferCreationAttributes,
     Model,
     Sequelize,
@@ -22,13 +23,13 @@ export const attr = {
     description: {
         type: DataTypes.STRING(245),
     },
-    born: DataTypes.DATE,
+    born: DataTypes.DATEONLY,
 };
 
 export class Author extends Model<any, InferCreationAttributes<Author>> {
     declare name: string;
     declare description: CreationOptional<string>;
-    declare born: CreationOptional<Date>;
+    declare born: CreationOptional<DateOnlyDataType>;
 }
 Author.init(attr, {
     sequelize,
