@@ -23,10 +23,6 @@ class AuthorController {
     }
 
     static async createAuthor(req: Request, res: Response, next: NextFunction) {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return HttpResponse.validation(res, errors.array());
-        }
         await Author.create({
             name: req.body.name,
             description: req.body.description,
@@ -54,10 +50,6 @@ class AuthorController {
         res: Response,
         next: NextFunction
     ): Promise<Response> {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return HttpResponse.validation(res, errors.array());
-        }
         const id: string = req.params.id;
         const name: string = req.body.name;
         const description: string = req.body.description;

@@ -12,7 +12,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_validator_1 = require("express-validator");
 const sequelize_1 = require("sequelize");
 const author_1 = require("../models/author");
 const responses_1 = __importDefault(require("../traits/responses"));
@@ -30,10 +29,6 @@ class AuthorController {
     }
     static createAuthor(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            const errors = (0, express_validator_1.validationResult)(req);
-            if (!errors.isEmpty()) {
-                return responses_1.default.validation(res, errors.array());
-            }
             yield author_1.Author.create({
                 name: req.body.name,
                 description: req.body.description,
@@ -59,10 +54,6 @@ class AuthorController {
     }
     static updateAuthor(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            const errors = (0, express_validator_1.validationResult)(req);
-            if (!errors.isEmpty()) {
-                return responses_1.default.validation(res, errors.array());
-            }
             const id = req.params.id;
             const name = req.body.name;
             const description = req.body.description;

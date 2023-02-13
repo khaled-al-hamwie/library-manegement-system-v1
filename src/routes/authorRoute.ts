@@ -12,12 +12,12 @@ const authorRouter: Router = Router();
 authorRouter
     .route("/author")
     .get(AuthorController.getAuthor)
-    .post(AuthorController.createAuthor);
+    .post(authorValidatorC(), validationHandler, AuthorController.createAuthor);
 authorRouter
     .route("/author/:id")
     .all([...id], validationHandler)
     .get(AuthorController.showAuthor)
-    .patch(authorValidatorU(), AuthorController.updateAuthor)
+    .patch(authorValidatorU(), validationHandler, AuthorController.updateAuthor)
     .delete(AuthorController.deleteAuthor);
 
 export default authorRouter;
