@@ -19,7 +19,7 @@ exports.attr = {
         type: sequelize_1.DataTypes.STRING(45),
         allowNull: false,
     },
-    year_of_publish: {
+    publishing_date: {
         type: sequelize_1.DataTypes.DATEONLY,
         allowNull: false,
     },

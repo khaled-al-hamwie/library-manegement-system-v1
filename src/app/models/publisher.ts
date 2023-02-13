@@ -20,7 +20,7 @@ export const attr = {
         type: DataTypes.STRING(45),
         allowNull: false,
     },
-    year_of_publish: {
+    publishing_date: {
         type: DataTypes.DATEONLY,
         allowNull: false,
     },
@@ -28,7 +28,7 @@ export const attr = {
 
 export class Publisher extends Model<any, InferCreationAttributes<Publisher>> {
     declare name: string;
-    declare year_of_publish: DateOnlyDataType;
+    declare publishing_date: DateOnlyDataType;
 }
 Publisher.init(attr, {
     sequelize,
