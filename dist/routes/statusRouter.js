@@ -12,11 +12,11 @@ const statusRouter = (0, express_1.Router)();
 statusRouter
     .route("/status")
     .get(statusController_1.default.getStatus)
-    .post((0, statusValidator_1.statusValidatorC)(), validationHandler_1.validationHandler, statusController_1.default.createStatus);
+    .post((0, statusValidator_1.statusValidator)(), validationHandler_1.validationHandler, statusController_1.default.createStatus);
 statusRouter
     .route("/status/:id")
     .all([...id_1.id], validationHandler_1.validationHandler)
     .get(statusController_1.default.showStatus)
-    .patch((0, statusValidator_1.statusValidatorU)(), validationHandler_1.validationHandler, statusController_1.default.updateStatus)
+    .patch((0, statusValidator_1.statusValidator)(true), validationHandler_1.validationHandler, statusController_1.default.updateStatus)
     .delete(statusController_1.default.deleteStatus);
 exports.default = statusRouter;
