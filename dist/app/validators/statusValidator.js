@@ -1,12 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.statusValidatorU = exports.statusValidatorC = void 0;
+exports.statusValidator = void 0;
 const string_1 = require("../schemas/string");
-function statusValidatorC() {
-    return [...(0, string_1.string)("name")];
+function statusValidator(acceptOptional = false) {
+    const optionalValidation = [...(0, string_1.stringO)("name")];
+    const nonOptionalValidation = [...(0, string_1.string)("name")];
+    return acceptOptional ? optionalValidation : nonOptionalValidation;
 }
-exports.statusValidatorC = statusValidatorC;
-function statusValidatorU() {
-    return [...(0, string_1.stringO)("name")];
-}
-exports.statusValidatorU = statusValidatorU;
+exports.statusValidator = statusValidator;
