@@ -1,7 +1,16 @@
 import { body, ValidationChain } from "express-validator";
 import validationMessage from "../messages/validationMessage";
 
-type stringField = "name" | "description" | "title";
+type stringField =
+    | "name"
+    | "description"
+    | "title"
+    | "edition"
+    | "type"
+    | "last_name"
+    | "first_name"
+    | "address"
+    | "report";
 export function string(
     title: stringField,
     isLong: boolean = false
