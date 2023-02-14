@@ -1,11 +1,19 @@
 // import inflection from "inflection";
-import sequelize, {
+import {
+    BelongsToGetAssociationMixin,
+    BlobDataType,
+    CreationOptional,
     DataTypes,
+    ForeignKey,
+    InferCreationAttributes,
+    MediumIntegerDataType,
     Model,
-    ModelAttributeColumnOptions,
-    Sequelize,
 } from "sequelize";
-
+import sequelize from "../providers/databaseProvider";
+import { Author } from "./author";
+import { Category } from "./category";
+import { Publisher } from "./publisher";
+import { Status } from "./status";
 export const name: string = "Book";
 export const attr = {
     book_id: {
@@ -63,7 +71,7 @@ export const attr = {
             min: 0,
         },
     },
-    Image: DataTypes.BLOB,
+    image: DataTypes.BLOB,
 };
 export const status = {
     name: "status_id",
@@ -78,16 +86,32 @@ export const status = {
     },
 };
 
-export const Book = (sequelize: Sequelize) => {
-    class Book extends Model {}
-    Book.init(
-        { ...attr, status_id: status.attr },
-        {
-            sequelize,
-            tableName: "Book",
-            timestamps: false,
-            modelName: "Book",
-        }
-    );
-    return Book;
-};
+export class Book extends Model<any, InferCreationAttributes<Book>> {
+    declare book_id: CreationOptional<MediumIntegerDataType>;
+    declare category_id: ForeignKey<Category["category_id"]>;
+    declare author_id: ForeignKey<Author["author_id"]>;
+    declare publisher_id: ForeignKey<Publisher["publisher_id"]>;
+    declare status_id: ForeignKey<Status["status_id"]>;
+    declare title: string;
+    declare description: string;
+    declare edition: string;
+    declare price: number;
+    declare reservation_daily_value: number;
+    declare image: CreationOptional<BlobDataType>;
+
+    // declare
+    declare getCategory: BelongsToGetAssociationMixin<Category>;
+    declare getPublisher: BelongsToGetAssociationMixin<Publisher>;
+    declare getAuthor: BelongsToGetAssociationMixin<Author>;
+    declare getStatus: BelongsToGetAssociationMixin<Status>;
+}
+
+Book.init(
+    { ...attr, status_id: status.attr },
+    {
+        sequelize,
+        tableName: "Book",
+        timestamps: false,
+        modelName: "Book",
+    }
+);

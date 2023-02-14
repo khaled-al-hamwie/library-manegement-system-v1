@@ -1,8 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Book = exports.status = exports.attr = exports.name = void 0;
 // import inflection from "inflection";
 const sequelize_1 = require("sequelize");
+const databaseProvider_1 = __importDefault(require("../providers/databaseProvider"));
 exports.name = "Book";
 exports.attr = {
     book_id: {
@@ -60,7 +64,7 @@ exports.attr = {
             min: 0,
         },
     },
-    Image: sequelize_1.DataTypes.BLOB,
+    image: sequelize_1.DataTypes.BLOB,
 };
 exports.status = {
     name: "status_id",
@@ -74,15 +78,12 @@ exports.status = {
         },
     },
 };
-const Book = (sequelize) => {
-    class Book extends sequelize_1.Model {
-    }
-    Book.init(Object.assign(Object.assign({}, exports.attr), { status_id: exports.status.attr }), {
-        sequelize,
-        tableName: "Book",
-        timestamps: false,
-        modelName: "Book",
-    });
-    return Book;
-};
+class Book extends sequelize_1.Model {
+}
 exports.Book = Book;
+Book.init(Object.assign(Object.assign({}, exports.attr), { status_id: exports.status.attr }), {
+    sequelize: databaseProvider_1.default,
+    tableName: "Book",
+    timestamps: false,
+    modelName: "Book",
+});
