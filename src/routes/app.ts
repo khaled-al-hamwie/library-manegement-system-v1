@@ -1,6 +1,7 @@
 import bodyParser from "body-parser";
 import { json, Router } from "express";
 import authorRouter from "./authorRoute";
+import bookRouter from "./bookRoute";
 import categoryRouter from "./categoryRoute";
 import publisherRouter from "./publisherRoute";
 import statusRouter from "./statusRouter";
@@ -14,7 +15,8 @@ router.use(
     categoryRouter,
     authorRouter,
     publisherRouter,
-    statusRouter
+    statusRouter,
+    bookRouter
 );
 
 export default router;
