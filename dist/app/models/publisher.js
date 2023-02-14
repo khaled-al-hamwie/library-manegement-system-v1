@@ -7,6 +7,7 @@ exports.Publisher = exports.attr = exports.name = void 0;
 // import inflection from "inflection";
 const sequelize_1 = require("sequelize");
 const databaseProvider_1 = __importDefault(require("../providers/databaseProvider"));
+const book_1 = require("./book");
 exports.name = "Publisher";
 exports.attr = {
     publisher_id: {
@@ -33,3 +34,7 @@ Publisher.init(exports.attr, {
     timestamps: false,
     modelName: "Publisher",
 });
+Publisher.hasMany(book_1.Book, {
+    foreignKey: "publisher_id",
+});
+book_1.Book.belongsTo(Publisher, { foreignKey: "publisher_id" });
