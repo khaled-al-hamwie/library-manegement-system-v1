@@ -1,10 +1,19 @@
-import { born, bornO } from "../schemas/born";
+import { ValidationChain } from "express-validator";
+import { dateOnly, dateOnlyO } from "../schemas/dateOnly";
 import { string, stringO } from "../schemas/string";
 
-export function authorValidatorC() {
-    return [...string("name"), ...string("description"), ...born];
-}
-
-export function authorValidatorU() {
-    return [...stringO("name"), ...stringO("descriptionO", true), ...bornO];
+export function authorValidator(
+    acceptOptional: boolean = false
+): ValidationChain[] {
+    const optionalValidation: ValidationChain[] = [
+        ...stringO("name"),
+        ...stringO("description", true),
+        ...dateOnlyO("born"),
+    ];
+    const nonOptionalValidation: ValidationChain[] = [
+        ...string("name"),
+        ...string("description"),
+        ...dateOnly("born"),
+    ];
+    return acceptOptional ? optionalValidation : nonOptionalValidation;
 }
