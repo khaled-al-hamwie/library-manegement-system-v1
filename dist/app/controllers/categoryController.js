@@ -57,7 +57,6 @@ class CategoryController {
             const description = req.body.description;
             const category = yield category_1.Category.findByPk(id);
             if (category) {
-                console.log(req.body.name, req.body.description);
                 if (name) {
                     category.set("name", name);
                 }

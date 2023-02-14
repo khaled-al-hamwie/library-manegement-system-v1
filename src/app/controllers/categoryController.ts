@@ -61,7 +61,6 @@ class CategoryController {
         const description: string = req.body.description;
         const category = await Category.findByPk(id);
         if (category) {
-            console.log(req.body.name, req.body.description);
             if (name) {
                 category.set("name", name);
             }
