@@ -12,11 +12,11 @@ const publisherRouter = (0, express_1.Router)();
 publisherRouter
     .route("/publisher")
     .get(publisherController_1.default.getPublisher)
-    .post((0, publisherValidator_1.publisherValidatorC)(), validationHandler_1.validationHandler, publisherController_1.default.createPublisher);
+    .post((0, publisherValidator_1.publisherValidator)(), validationHandler_1.validationHandler, publisherController_1.default.createPublisher);
 publisherRouter
     .route("/publisher/:id")
     .all([...id_1.id], validationHandler_1.validationHandler)
     .get(publisherController_1.default.showPublisher)
-    .patch((0, publisherValidator_1.publisherValidatorU)(), validationHandler_1.validationHandler, publisherController_1.default.updatePublisher)
+    .patch((0, publisherValidator_1.publisherValidator)(true), validationHandler_1.validationHandler, publisherController_1.default.updatePublisher)
     .delete(publisherController_1.default.deletePublisher);
 exports.default = publisherRouter;

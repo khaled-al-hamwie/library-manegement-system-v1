@@ -2,17 +2,14 @@ import { Router } from "express";
 import PublisherController from "../app/controllers/publisherController";
 import { validationHandler } from "../app/middleware/validationHandler";
 import { id } from "../app/schemas/id";
-import {
-    publisherValidatorC,
-    publisherValidatorU,
-} from "../app/validators/publisherValidator";
+import { publisherValidator } from "../app/validators/publisherValidator";
 const publisherRouter: Router = Router();
 
 publisherRouter
     .route("/publisher")
     .get(PublisherController.getPublisher)
     .post(
-        publisherValidatorC(),
+        publisherValidator(),
         validationHandler,
         PublisherController.createPublisher
     );
@@ -21,7 +18,7 @@ publisherRouter
     .all([...id], validationHandler)
     .get(PublisherController.showPublisher)
     .patch(
-        publisherValidatorU(),
+        publisherValidator(true),
         validationHandler,
         PublisherController.updatePublisher
     )
