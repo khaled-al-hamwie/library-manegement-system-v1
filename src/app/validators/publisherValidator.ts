@@ -1,10 +1,17 @@
+import { ValidationChain } from "express-validator";
+import { dateOnly, dateOnlyO } from "../schemas/dateOnly";
 import { string, stringO } from "../schemas/string";
-import { year_of_publish, year_of_publishO } from "../schemas/year_of_publish";
 
-export function publisherValidatorC() {
-    return [...string("name"), ...year_of_publish];
-}
-
-export function publisherValidatorU() {
-    return [...stringO("name"), ...year_of_publishO];
+export function publisherValidator(
+    acceptOptional: boolean = false
+): ValidationChain[] {
+    const optionalValidation: ValidationChain[] = [
+        ...stringO("name"),
+        ...dateOnlyO("publishing_date"),
+    ];
+    const nonOptionalValidation: ValidationChain[] = [
+        ...string("name"),
+        ...dateOnly("publishing_date"),
+    ];
+    return acceptOptional ? optionalValidation : nonOptionalValidation;
 }
