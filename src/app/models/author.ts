@@ -2,11 +2,16 @@ import {
     CreationOptional,
     DataTypes,
     DateOnlyDataType,
+    HasManyCountAssociationsMixin,
+    HasManyGetAssociationsMixin,
+    HasManyHasAssociationMixin,
     InferCreationAttributes,
+    MediumIntegerDataType,
     Model,
     Sequelize,
 } from "sequelize";
 import sequelize from "../providers/databaseProvider";
+import { Book } from "./book";
 
 export const name: string = "Author";
 export const attr = {
@@ -27,9 +32,14 @@ export const attr = {
 };
 
 export class Author extends Model<any, InferCreationAttributes<Author>> {
+    declare author_id: CreationOptional<MediumIntegerDataType>;
     declare name: string;
     declare description: CreationOptional<string>;
     declare born: CreationOptional<DateOnlyDataType>;
+
+    declare getBooks: HasManyGetAssociationsMixin<Book>;
+    declare countBooks: HasManyCountAssociationsMixin;
+    declare hasBook: HasManyHasAssociationMixin<Book, Book>;
 }
 Author.init(attr, {
     sequelize,
@@ -37,3 +47,6 @@ Author.init(attr, {
     timestamps: false,
     modelName: "Author",
 });
+
+Author.hasMany(Book, { foreignKey: "author_id" });
+Book.belongsTo(Author, { foreignKey: "author_id" });
