@@ -1,7 +1,9 @@
 import { body, ValidationChain } from "express-validator";
 import validationMessage from "../messages/validationMessage";
+
+type stringField = "name" | "description" | "title";
 export function string(
-    title: string,
+    title: stringField,
     isLong: boolean = false
 ): ValidationChain[] {
     const longVlaidation: ValidationChain[] = [
@@ -20,7 +22,7 @@ export function string(
     return isLong ? longVlaidation : smallValidation;
 }
 export function stringO(
-    title: string,
+    title: stringField,
     isLong: boolean = false
 ): ValidationChain[] {
     const longVlaidation: ValidationChain[] = [
