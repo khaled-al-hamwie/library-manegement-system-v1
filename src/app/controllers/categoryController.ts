@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { validationResult } from "express-validator";
 import { Op } from "sequelize";
+import { Book } from "../models/book";
 import { Category } from "../models/category";
 import sequelize from "../providers/databaseProvider";
 import HttpResponse from "../traits/responses";
@@ -37,18 +38,16 @@ class CategoryController {
     }
 
     static async showCategory(req: Request, res: Response, next: NextFunction) {
-        await Category.findByPk(req.params.id)
-            .then((results) => {
-                if (results == null) {
-                    return HttpResponse.notFound(
-                        res,
-                        "category",
-                        req.params.id
-                    );
-                }
-                return HttpResponse.fetch(res, results);
-            })
-            .catch((errors) => HttpResponse.server(res, errors));
+        const id: string = req.params.id;
+        const category = await Category.findByPk(id);
+        if (category) {
+            return HttpResponse.fetch(res, {
+                category,
+                books: await category.getBooks(),
+                count: await category.countBooks(),
+            });
+        }
+        return HttpResponse.notFound(res, "category", id);
     }
 
     static async updateCategory(

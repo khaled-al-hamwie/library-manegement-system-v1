@@ -40,14 +40,16 @@ class CategoryController {
     }
     static showCategory(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield category_1.Category.findByPk(req.params.id)
-                .then((results) => {
-                if (results == null) {
-                    return responses_1.default.notFound(res, "category", req.params.id);
-                }
-                return responses_1.default.fetch(res, results);
-            })
-                .catch((errors) => responses_1.default.server(res, errors));
+            const id = req.params.id;
+            const category = yield category_1.Category.findByPk(id);
+            if (category) {
+                return responses_1.default.fetch(res, {
+                    category,
+                    books: yield category.getBooks(),
+                    count: yield category.countBooks(),
+                });
+            }
+            return responses_1.default.notFound(res, "category", id);
         });
     }
     static updateCategory(req, res, next) {
