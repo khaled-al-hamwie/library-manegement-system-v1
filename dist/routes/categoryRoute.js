@@ -12,11 +12,11 @@ const categoryRouter = (0, express_1.Router)();
 categoryRouter
     .route("/category")
     .get(categoryController_1.default.getCategory)
-    .post((0, categoryValidator_1.categoryValidatorC)(), validationHandler_1.validationHandler, categoryController_1.default.createCategory);
+    .post((0, categoryValidator_1.categoryValidator)(), validationHandler_1.validationHandler, categoryController_1.default.createCategory);
 categoryRouter
     .route("/category/:id")
     .all([...id_1.id], validationHandler_1.validationHandler)
     .get(categoryController_1.default.showCategory)
-    .patch((0, categoryValidator_1.categoryValidatorU)(), validationHandler_1.validationHandler, categoryController_1.default.updateCategory)
+    .patch((0, categoryValidator_1.categoryValidator)(true), validationHandler_1.validationHandler, categoryController_1.default.updateCategory)
     .delete(categoryController_1.default.deleteCategory);
 exports.default = categoryRouter;

@@ -2,17 +2,14 @@ import { Router } from "express";
 import CategoryController from "../app/controllers/categoryController";
 import { validationHandler } from "../app/middleware/validationHandler";
 import { id } from "../app/schemas/id";
-import {
-    categoryValidatorC,
-    categoryValidatorU,
-} from "../app/validators/categoryValidator";
+import { categoryValidator } from "../app/validators/categoryValidator";
 const categoryRouter: Router = Router();
 
 categoryRouter
     .route("/category")
     .get(CategoryController.getCategory)
     .post(
-        categoryValidatorC(),
+        categoryValidator(),
         validationHandler,
         CategoryController.createCategory
     );
@@ -21,7 +18,7 @@ categoryRouter
     .all([...id], validationHandler)
     .get(CategoryController.showCategory)
     .patch(
-        categoryValidatorU(),
+        categoryValidator(true),
         validationHandler,
         CategoryController.updateCategory
     )
