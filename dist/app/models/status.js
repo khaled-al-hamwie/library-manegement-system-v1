@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Status = exports.attr = exports.name = void 0;
 const sequelize_1 = require("sequelize");
 const databaseProvider_1 = __importDefault(require("../providers/databaseProvider"));
+const book_1 = require("./book");
 exports.name = "Status";
 exports.attr = {
     status_id: {
@@ -28,3 +29,7 @@ Status.init(exports.attr, {
     timestamps: false,
     modelName: "Status",
 });
+Status.hasMany(book_1.Book, {
+    foreignKey: "status_id",
+});
+book_1.Book.belongsTo(Status, { foreignKey: "status_id" });
