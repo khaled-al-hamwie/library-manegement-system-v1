@@ -7,6 +7,7 @@ exports.Category = exports.attr = exports.name = void 0;
 // import inflection from "inflection";
 const sequelize_1 = require("sequelize");
 const databaseProvider_1 = __importDefault(require("../providers/databaseProvider"));
+const book_1 = require("./book");
 exports.name = "Category";
 exports.attr = {
     category_id: {
@@ -33,3 +34,7 @@ Category.init(exports.attr, {
     timestamps: false,
     modelName: "Category",
 });
+Category.hasMany(book_1.Book, {
+    foreignKey: "category_id",
+});
+book_1.Book.belongsTo(Category, { foreignKey: "category_id" });
