@@ -12,11 +12,11 @@ const authorRouter = (0, express_1.Router)();
 authorRouter
     .route("/author")
     .get(authorController_1.default.getAuthor)
-    .post((0, authorValidator_1.authorValidatorC)(), validationHandler_1.validationHandler, authorController_1.default.createAuthor);
+    .post((0, authorValidator_1.authorValidator)(), validationHandler_1.validationHandler, authorController_1.default.createAuthor);
 authorRouter
     .route("/author/:id")
-    .all([...id_1.id], validationHandler_1.validationHandler)
+    .all(id_1.id, validationHandler_1.validationHandler)
     .get(authorController_1.default.showAuthor)
-    .patch((0, authorValidator_1.authorValidatorU)(), validationHandler_1.validationHandler, authorController_1.default.updateAuthor)
+    .patch((0, authorValidator_1.authorValidator)(true), validationHandler_1.validationHandler, authorController_1.default.updateAuthor)
     .delete(authorController_1.default.deleteAuthor);
 exports.default = authorRouter;
