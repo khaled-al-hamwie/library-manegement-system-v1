@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { param } from "express-validator";
 import CategoryController from "../app/controllers/categoryController";
 import { validationHandler } from "../app/middleware/validationHandler";
 import { id } from "../app/schemas/id";
@@ -7,7 +8,7 @@ const categoryRouter: Router = Router();
 
 categoryRouter
     .route("/category")
-    .get(CategoryController.getCategory)
+    .get(param("name"), validationHandler, CategoryController.getCategory)
     .post(
         categoryValidator(),
         validationHandler,
@@ -15,7 +16,7 @@ categoryRouter
     );
 categoryRouter
     .route("/category/:id")
-    .all([...id], validationHandler)
+    .all(id, validationHandler)
     .get(CategoryController.showCategory)
     .patch(
         categoryValidator(true),

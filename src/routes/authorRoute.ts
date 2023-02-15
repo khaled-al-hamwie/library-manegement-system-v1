@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { param } from "express-validator";
 import AuthorController from "../app/controllers/authorController";
 import { validationHandler } from "../app/middleware/validationHandler";
 import { id } from "../app/schemas/id";
@@ -8,7 +9,7 @@ const authorRouter: Router = Router();
 
 authorRouter
     .route("/author")
-    .get(AuthorController.getAuthor)
+    .get(param("name"), validationHandler, AuthorController.getAuthor)
     .post(authorValidator(), validationHandler, AuthorController.createAuthor);
 authorRouter
     .route("/author/:id")

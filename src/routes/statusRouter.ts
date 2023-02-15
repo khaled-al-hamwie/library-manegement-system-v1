@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { param } from "express-validator";
 import statusController from "../app/controllers/statusController";
 import { validationHandler } from "../app/middleware/validationHandler";
 import { id } from "../app/schemas/id";
@@ -7,11 +8,11 @@ const statusRouter: Router = Router();
 
 statusRouter
     .route("/status")
-    .get(statusController.getStatus)
+    .get(param("name"), validationHandler, statusController.getStatus)
     .post(statusValidator(), validationHandler, statusController.createStatus);
 statusRouter
     .route("/status/:id")
-    .all([...id], validationHandler)
+    .all(id, validationHandler)
     .get(statusController.showStatus)
     .patch(
         statusValidator(true),
