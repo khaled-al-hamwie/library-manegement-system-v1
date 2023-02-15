@@ -13,9 +13,12 @@ class validationMessage {
         }
         return `your ${field} length is invalid`;
     }
-    static type(type: string) {
-        const start = type.match(/\b[aeuio][a-zA-Z]*/g) ? "an" : "a";
-        return `please provide ${start} ${type} value`;
+    static type(type: string, value: string) {
+        // const start = type.match(/\b[aeuio][a-zA-Z]*/g) ? "an" : "a";
+        return `the value ${value} is not a valid ${type}`;
+    }
+    static notFound(name: string, value: string) {
+        return `the ${name} with the id = ${value} doesn't exists`;
     }
 }
 export default validationMessage;
