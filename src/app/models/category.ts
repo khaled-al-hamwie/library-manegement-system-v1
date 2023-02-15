@@ -1,6 +1,5 @@
 // import inflection from "inflection";
 import {
-    Association,
     CreationOptional,
     DataTypes,
     HasManyCountAssociationsMixin,
@@ -8,7 +7,6 @@ import {
     HasManyHasAssociationMixin,
     InferCreationAttributes,
     Model,
-    Sequelize,
     SmallIntegerDataType,
 } from "sequelize";
 import sequelize from "../providers/databaseProvider";
@@ -24,6 +22,7 @@ export const attr = {
     name: {
         type: DataTypes.STRING(45),
         allowNull: false,
+        unique: true,
     },
     description: {
         type: DataTypes.STRING(245),

@@ -19,6 +19,7 @@ exports.attr = {
     name: {
         type: sequelize_1.DataTypes.STRING(45),
         allowNull: false,
+        unique: true,
     },
     description: {
         type: sequelize_1.DataTypes.STRING(245),
