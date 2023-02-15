@@ -18,6 +18,7 @@ exports.attr = {
     name: {
         type: sequelize_1.DataTypes.STRING(45),
         allowNull: false,
+        unique: true,
     },
 };
 class Status extends sequelize_1.Model {

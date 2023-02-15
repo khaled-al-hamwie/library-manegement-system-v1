@@ -6,7 +6,6 @@ import {
     HasManyHasAssociationMixin,
     InferCreationAttributes,
     Model,
-    Sequelize,
     TinyIntegerDataType,
 } from "sequelize";
 import sequelize from "../providers/databaseProvider";
@@ -22,6 +21,7 @@ export const attr = {
     name: {
         type: DataTypes.STRING(45),
         allowNull: false,
+        unique: true,
     },
 };
 
