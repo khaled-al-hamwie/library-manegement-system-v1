@@ -57,7 +57,7 @@ exports.attr = {
             min: 0,
         },
     },
-    reservation_daily_value: {
+    reservation_price: {
         type: sequelize_1.DataTypes.DECIMAL(9, 2),
         allowNull: false,
         validate: {
