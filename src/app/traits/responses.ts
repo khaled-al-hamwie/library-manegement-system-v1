@@ -1,5 +1,6 @@
 import { Express, Response } from "express";
 import httpMessage from "../messages/httpMessage";
+import validationMessage from "../messages/validationMessage";
 
 class HttpResponse {
     static validation(res: Response, errors: any): Response {
@@ -23,7 +24,7 @@ class HttpResponse {
     static notFound(res: Response, name: string, value: any): Response {
         return res.status(404).json({
             message: httpMessage.notFound(),
-            errors: `the ${name} with the id = ${value} doesn't exists`,
+            errors: validationMessage.notFound(name, value),
         });
     }
     static ok(res: Response): Response {

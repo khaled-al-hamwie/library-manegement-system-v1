@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const httpMessage_1 = __importDefault(require("../messages/httpMessage"));
+const validationMessage_1 = __importDefault(require("../messages/validationMessage"));
 class HttpResponse {
     static validation(res, errors) {
         return res.status(422).json({
@@ -26,7 +27,7 @@ class HttpResponse {
     static notFound(res, name, value) {
         return res.status(404).json({
             message: httpMessage_1.default.notFound(),
-            errors: `the ${name} with the id = ${value} doesn't exists`,
+            errors: validationMessage_1.default.notFound(name, value),
         });
     }
     static ok(res) {
