@@ -8,7 +8,7 @@ export function isQuery(title: queryType): ValidationChain[] {
             .optional()
             .trim()
             .isString()
-            .withMessage(validationMessage.type("string"))
+            .withMessage((value) => validationMessage.type("string", value))
             .isLength({ min: 3, max: 45 })
             .withMessage(validationMessage.outOfLength(title)),
     ];

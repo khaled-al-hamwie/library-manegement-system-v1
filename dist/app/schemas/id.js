@@ -7,5 +7,7 @@ exports.id = void 0;
 const express_validator_1 = require("express-validator");
 const validationMessage_1 = __importDefault(require("../messages/validationMessage"));
 exports.id = [
-    (0, express_validator_1.param)("id").isNumeric().withMessage(validationMessage_1.default.type("number")),
+    (0, express_validator_1.param)("id")
+        .isNumeric()
+        .withMessage((value) => validationMessage_1.default.type("number", value)),
 ];

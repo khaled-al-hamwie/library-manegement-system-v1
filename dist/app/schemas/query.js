@@ -12,7 +12,7 @@ function isQuery(title) {
             .optional()
             .trim()
             .isString()
-            .withMessage(validationMessage_1.default.type("string"))
+            .withMessage((value) => validationMessage_1.default.type("string", value))
             .isLength({ min: 3, max: 45 })
             .withMessage(validationMessage_1.default.outOfLength(title)),
     ];

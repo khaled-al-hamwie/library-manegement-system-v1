@@ -3,8 +3,16 @@ import validationMessage from "../messages/validationMessage";
 
 type dateOnlyField = "born" | "publishing_date";
 export function dateOnly(title: dateOnlyField): ValidationChain[] {
-    return [body(title).isDate().withMessage(validationMessage.type("date"))];
+    return [
+        body(title)
+            .isDate()
+            .withMessage((value) => validationMessage.type("date", value)),
+    ];
 }
 export function dateOnlyO(title: dateOnlyField): ValidationChain[] {
-    return [body(title).isDate().withMessage(validationMessage.type("date"))];
+    return [
+        body(title)
+            .isDate()
+            .withMessage((value) => validationMessage.type("date", value)),
+    ];
 }
