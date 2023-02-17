@@ -11,8 +11,11 @@ const errorFormatter = ({ location, msg, param, value, nestedErrors, }) => {
 };
 function validationHandler(req, res, next) {
     const errors = (0, express_validator_1.validationResult)(req).formatWith(errorFormatter);
-    if (!errors.isEmpty()) {
-        return responses_1.default.validation(res, errors.array());
+    if (!errors.isEmpty() || req.body.imageError) {
+        return responses_1.default.validation(res, [
+            ...errors.array(),
+            ...req.body.imageError,
+        ]);
     }
     next();
 }

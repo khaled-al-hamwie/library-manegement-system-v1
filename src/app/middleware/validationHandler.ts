@@ -23,8 +23,11 @@ export function validationHandler(
     next: NextFunction
 ) {
     const errors = validationResult(req).formatWith(errorFormatter);
-    if (!errors.isEmpty()) {
-        return HttpResponse.validation(res, errors.array());
+    if (!errors.isEmpty() || req.body.imageError) {
+        return HttpResponse.validation(res, [
+            ...errors.array(),
+            ...req.body.imageError,
+        ]);
     }
     next();
 }
