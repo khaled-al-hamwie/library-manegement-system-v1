@@ -20,5 +20,9 @@ class validationMessage {
     static notFound(name, value) {
         return `the ${name} with the id = ${value} doesn't exists`;
     }
+    static size(type, value) {
+        const start = type.match(/\b[aeuio][a-zA-Z]*/g) ? "an" : "a";
+        return `the ${type} is too big choose ${start} ${type} smaller than ${value}`;
+    }
 }
 exports.default = validationMessage;
