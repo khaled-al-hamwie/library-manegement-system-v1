@@ -11,8 +11,8 @@ function authorValidator(acceptOptional = false) {
     ];
     const nonOptionalValidation = [
         ...(0, string_1.string)("name"),
-        ...(0, string_1.string)("description"),
-        ...(0, dateOnly_1.dateOnly)("born"),
+        ...(0, string_1.stringO)("description", true),
+        ...(0, dateOnly_1.dateOnlyO)("born"),
     ];
     return acceptOptional ? optionalValidation : nonOptionalValidation;
 }

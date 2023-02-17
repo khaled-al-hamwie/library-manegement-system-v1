@@ -12,8 +12,8 @@ export function authorValidator(
     ];
     const nonOptionalValidation: ValidationChain[] = [
         ...string("name"),
-        ...string("description"),
-        ...dateOnly("born"),
+        ...stringO("description", true),
+        ...dateOnlyO("born"),
     ];
     return acceptOptional ? optionalValidation : nonOptionalValidation;
 }
