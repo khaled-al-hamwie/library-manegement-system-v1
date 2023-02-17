@@ -17,6 +17,7 @@ exports.dateOnly = dateOnly;
 function dateOnlyO(title) {
     return [
         (0, express_validator_1.body)(title)
+            .optional()
             .isDate()
             .withMessage((value) => validationMessage_1.default.type("date", value)),
     ];

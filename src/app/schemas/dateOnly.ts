@@ -12,6 +12,7 @@ export function dateOnly(title: dateOnlyField): ValidationChain[] {
 export function dateOnlyO(title: dateOnlyField): ValidationChain[] {
     return [
         body(title)
+            .optional()
             .isDate()
             .withMessage((value) => validationMessage.type("date", value)),
     ];
