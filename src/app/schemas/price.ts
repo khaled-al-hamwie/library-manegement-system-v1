@@ -1,7 +1,7 @@
 import { body, ValidationChain } from "express-validator";
 import validationMessage from "../messages/validationMessage";
 
-type priceType = "price" | "reservation_daily_value";
+type priceType = "price" | "reservation_price";
 export function price(field: priceType): ValidationChain[] {
     return [
         body(field)

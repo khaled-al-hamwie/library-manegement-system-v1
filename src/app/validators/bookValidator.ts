@@ -18,7 +18,7 @@ export function bookValidator(
             ...string("description"),
             ...stringO("edition"),
             ...price("price"),
-            ...price("reservation_daily_value"),
+            ...price("reservation_price"),
         ];
     if (type == "update")
         return [
@@ -30,7 +30,7 @@ export function bookValidator(
             ...string("description"),
             ...stringO("edition"),
             ...priceO("price"),
-            ...priceO("reservation_daily_value"),
+            ...priceO("reservation_price"),
         ];
     return [...isQuery("title"), ...isQuery("author"), ...isQuery("category")];
 }

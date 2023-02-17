@@ -16,7 +16,7 @@ function bookValidator(type = "get") {
             ...(0, string_1.string)("description"),
             ...(0, string_1.stringO)("edition"),
             ...(0, price_1.price)("price"),
-            ...(0, price_1.price)("reservation_daily_value"),
+            ...(0, price_1.price)("reservation_price"),
         ];
     if (type == "update")
         return [
@@ -28,7 +28,7 @@ function bookValidator(type = "get") {
             ...(0, string_1.string)("description"),
             ...(0, string_1.stringO)("edition"),
             ...(0, price_1.priceO)("price"),
-            ...(0, price_1.priceO)("reservation_daily_value"),
+            ...(0, price_1.priceO)("reservation_price"),
         ];
     return [...(0, query_1.isQuery)("title"), ...(0, query_1.isQuery)("author"), ...(0, query_1.isQuery)("category")];
 }

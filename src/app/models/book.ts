@@ -71,7 +71,7 @@ export const attr = {
             min: 0,
         },
     },
-    image: DataTypes.BLOB,
+    image: DataTypes.STRING(245),
 };
 export const status = {
     name: "status_id",
@@ -96,8 +96,8 @@ export class Book extends Model<any, InferCreationAttributes<Book>> {
     declare description: string;
     declare edition: string;
     declare price: number;
-    declare reservation_daily_value: number;
-    declare image: CreationOptional<BlobDataType>;
+    declare reservation_price: number;
+    declare image: CreationOptional<string> | null;
 
     // declare
     declare getCategory: BelongsToGetAssociationMixin<Category>;

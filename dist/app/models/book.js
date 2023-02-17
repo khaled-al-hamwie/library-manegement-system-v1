@@ -64,7 +64,7 @@ exports.attr = {
             min: 0,
         },
     },
-    image: sequelize_1.DataTypes.BLOB,
+    image: sequelize_1.DataTypes.STRING(245),
 };
 exports.status = {
     name: "status_id",
