@@ -24,3 +24,26 @@ series
 classics
 graphic-novels
 memoir
+
+
+async function getBook() {
+    await fetch("https://www.googleapis.com/books/v1/volumes/s1gVAAAAYAAJ")
+        .then((response) => response.json())
+        .then((data) => {
+            let author = [];
+            author.push({ name: data.volumeInfo.authors[0] });
+            let book = [];
+            book.push({
+                title: data.volumeInfo.title,
+                description: data.volumeInfo.description,
+                edition: data.volumeInfo.contentVersion,
+                price: data.volumeInfo.printedPageCount,
+                reservation_price: data.volumeInfo.averageRating,
+                image: data.volumeInfo.imageLinks.large,
+            });
+            console.log(book);
+            console.log(author);
+        })
+        .catch(console.error);
+}
+getBook();
