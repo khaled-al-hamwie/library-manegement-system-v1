@@ -200,7 +200,7 @@ export = {
 
     async down(queryInterface: QueryInterface, Sequelize: Sequelize) {
         return queryInterface.bulkDelete("Category", {
-            category_id: { [Op.between]: [1, 26] },
+            category_id: { [Op.between]: [1, 39] },
         });
     },
 };
