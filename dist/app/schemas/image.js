@@ -21,6 +21,23 @@ function image(req, res, next) {
                 error: validationMessage_1.default.size("image", "10 MB"),
             });
     }
+    // if (req.body.image) {
+    //     if (!validator.isLength(req.body.image, { max: 245, min: 5 }))
+    //         req.body.imageError.push({
+    //             field: "image",
+    //             error: validationMessage.size("image or url", req.body.image),
+    //         });
+    //     if (!validator.isURL(req.body.image))
+    //         req.body.imageError.push({
+    //             field: "image",
+    //             error: validationMessage.type("image or url", req.body.image),
+    //         });
+    //     // else {
+    //     // fetch(req.body.image)
+    //     //     .then((response) => console.log(response.headers))
+    //     //     .catch((err) => res.json({ err }));
+    //     // }
+    // }
     next();
 }
 exports.image = image;
