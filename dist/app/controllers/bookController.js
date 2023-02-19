@@ -12,15 +12,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const fs_1 = __importDefault(require("fs"));
-const path_1 = __importDefault(require("path"));
 const sequelize_1 = require("sequelize");
 const book_1 = require("../models/book");
 const responses_1 = __importDefault(require("../traits/responses"));
+const saveImage_1 = __importDefault(require("../traits/saveImage"));
 class BookController {
     static getBooks(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { title, category, author } = req.query;
+            const title = req.query.title;
             if (!title)
                 return responses_1.default.fetch(res, yield book_1.Book.findAll());
             else {
@@ -52,16 +51,8 @@ class BookController {
                 image: imageName,
             })
                 .then((result) => {
-                if (req.file && imageName) {
-                    {
-                        let buffer = req.file.buffer;
-                        fs_1.default.writeFile(path_1.default.join("images", imageName), buffer, (err) => {
-                            if (err)
-                                throw err;
-                            console.log("The file has been saved!");
-                        });
-                    }
-                }
+                if (req.file && imageName)
+                    (0, saveImage_1.default)(req.file.buffer, imageName);
                 return responses_1.default.creation(res, result, "book");
             })
                 .catch((err) => responses_1.default.server(res, err));
@@ -96,21 +87,71 @@ class BookController {
                     description: book.description,
                     edition: book.edition,
                     price: book.price,
-                    // reservation_price: book.reservation_daily_value,
+                    reservation_price: book.reservation_price,
                     image: book.image,
                 });
             }
-            return responses_1.default.notFound(res, "category", id);
+            return responses_1.default.notFound(res, "book", id);
         });
     }
     static updateBook(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            return res.json();
+            const id = req.params.id;
+            const request = req.body;
+            const book = yield book_1.Book.findByPk(id);
+            const imageName = req.file
+                ? Date.now() +
+                    "-" +
+                    Math.round(Math.random() * 1e9) +
+                    "-" +
+                    req.file.originalname.trim()
+                : null;
+            if (book) {
+                yield book
+                    .update({
+                    category_id: request.category_id
+                        ? request.category_id
+                        : book.category_id,
+                    author_id: request.author_id
+                        ? request.author_id
+                        : book.author_id,
+                    publisher_id: request.publisher_id
+                        ? request.publisher_id
+                        : book.publisher_id,
+                    status_id: request.status_id
+                        ? request.status_id
+                        : book.status_id,
+                    title: request.title ? request.title : book.title,
+                    description: request.description
+                        ? request.description
+                        : book.description,
+                    edition: request.edition ? request.edition : book.edition,
+                    price: request.price ? request.price : book.price,
+                    reservation_price: request.reservation_price
+                        ? request.reservation_price
+                        : book.reservation_price,
+                    image: imageName ? imageName : book.image,
+                })
+                    .then(() => {
+                    if (req.file && imageName)
+                        (0, saveImage_1.default)(req.file.buffer, imageName);
+                    return responses_1.default.ok(res);
+                })
+                    .catch((err) => responses_1.default.server(res, err));
+            }
+            else
+                return responses_1.default.notFound(res, "book", id);
         });
     }
     static deleteBook(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            return res.json();
+            const id = req.params.id;
+            const book = yield book_1.Book.findByPk(id);
+            if (book) {
+                yield book.destroy();
+                return responses_1.default.ok(res);
+            }
+            return responses_1.default.notFound(res, "book", id);
         });
     }
 }
