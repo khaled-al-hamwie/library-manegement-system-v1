@@ -20,7 +20,7 @@ exports.attr = {
         allowNull: false,
     },
     description: {
-        type: sequelize_1.DataTypes.STRING(245),
+        type: sequelize_1.DataTypes.STRING(500),
     },
     born: sequelize_1.DataTypes.DATEONLY,
 };

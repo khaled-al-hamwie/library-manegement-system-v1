@@ -26,7 +26,7 @@ export const attr = {
         allowNull: false,
     },
     description: {
-        type: DataTypes.STRING(245),
+        type: DataTypes.STRING(500),
     },
     born: DataTypes.DATEONLY,
 };
