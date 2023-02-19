@@ -23,7 +23,9 @@ bookRouter
     .all([...id], validationHandler)
     .get(BookController.showBook)
     .patch(
+        multer().single("image"),
         bookValidator("update"),
+        image,
         validationHandler,
         BookController.updateBook
     )

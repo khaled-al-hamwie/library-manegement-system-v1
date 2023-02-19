@@ -19,6 +19,6 @@ bookRouter
     .route("/book/:id")
     .all([...id_1.id], validationHandler_1.validationHandler)
     .get(bookController_1.default.showBook)
-    .patch((0, bookValidator_1.bookValidator)("update"), validationHandler_1.validationHandler, bookController_1.default.updateBook)
+    .patch((0, multer_1.default)().single("image"), (0, bookValidator_1.bookValidator)("update"), image_1.image, validationHandler_1.validationHandler, bookController_1.default.updateBook)
     .delete(bookController_1.default.deleteBook);
 exports.default = bookRouter;
