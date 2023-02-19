@@ -24,12 +24,12 @@ function bookValidator(type = "get") {
             ...(0, forignKey_1.forignKeyO)("author_id"),
             ...(0, forignKey_1.forignKeyO)("publisher_id"),
             ...(0, forignKey_1.forignKeyO)("status_id"),
-            ...(0, string_1.string)("title"),
-            ...(0, string_1.string)("description", true),
+            ...(0, string_1.stringO)("title"),
+            ...(0, string_1.stringO)("description", true),
             ...(0, string_1.stringO)("edition"),
             ...(0, price_1.priceO)("price"),
             ...(0, price_1.priceO)("reservation_price"),
         ];
-    return [...(0, query_1.isQuery)("title"), ...(0, query_1.isQuery)("author"), ...(0, query_1.isQuery)("category")];
+    return [...(0, query_1.isQuery)("title")];
 }
 exports.bookValidator = bookValidator;

@@ -26,11 +26,11 @@ export function bookValidator(
             ...forignKeyO("author_id"),
             ...forignKeyO("publisher_id"),
             ...forignKeyO("status_id"),
-            ...string("title"),
-            ...string("description", true),
+            ...stringO("title"),
+            ...stringO("description", true),
             ...stringO("edition"),
             ...priceO("price"),
             ...priceO("reservation_price"),
         ];
-    return [...isQuery("title"), ...isQuery("author"), ...isQuery("category")];
+    return [...isQuery("title")];
 }
