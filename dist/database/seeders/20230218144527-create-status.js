@@ -31,7 +31,7 @@ module.exports = {
     down(queryInterface, Sequelize) {
         return __awaiter(this, void 0, void 0, function* () {
             return queryInterface.bulkDelete("Status", {
-                category_id: { [sequelize_1.Op.between]: [1, 3] },
+                status_id: { [sequelize_1.Op.between]: [1, 3] },
             });
         });
     },
