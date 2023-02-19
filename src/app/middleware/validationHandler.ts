@@ -22,8 +22,8 @@ export function validationHandler(
     next: NextFunction
 ) {
     const errors = validationResult(req).formatWith(errorFormatter);
+    if (req.body.imageError === undefined) req.body.imageError = [];
     if (!errors.isEmpty() || req.body.imageError.length > 0) {
-        if (req.body.imageError === undefined) req.body.imageError = [];
         return HttpResponse.validation(res, [
             ...errors.array(),
             ...req.body.imageError,
