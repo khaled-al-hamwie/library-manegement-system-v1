@@ -1,9 +1,11 @@
 import bodyParser from "body-parser";
-import { Router } from "express";
+import { json, Router } from "express";
+import { errorHandler } from "../app/middleware/errorHandler";
 import authorRouter from "./authorRoute";
 import bookRouter from "./bookRoute";
 import categoryRouter from "./categoryRoute";
 import publisherRouter from "./publisherRoute";
+import readerRouter from "./readerRoute";
 import statusRouter from "./statusRouter";
 const router: Router = Router();
 
@@ -20,4 +22,6 @@ router.use(
     bookRouter
 );
 
+router.use(readerRouter);
+router.use(errorHandler);
 export default router;

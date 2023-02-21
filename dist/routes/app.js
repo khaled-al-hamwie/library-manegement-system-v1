@@ -5,14 +5,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const body_parser_1 = __importDefault(require("body-parser"));
 const express_1 = require("express");
+const errorHandler_1 = require("../app/middleware/errorHandler");
 const authorRoute_1 = __importDefault(require("./authorRoute"));
 const bookRoute_1 = __importDefault(require("./bookRoute"));
 const categoryRoute_1 = __importDefault(require("./categoryRoute"));
 const publisherRoute_1 = __importDefault(require("./publisherRoute"));
+const readerRoute_1 = __importDefault(require("./readerRoute"));
 const statusRouter_1 = __importDefault(require("./statusRouter"));
 const router = (0, express_1.Router)();
 router.use(body_parser_1.default.json());
 router.use(body_parser_1.default.urlencoded({ extended: true }));
 // router.use(json());
 router.use("/admin", categoryRoute_1.default, authorRoute_1.default, publisherRoute_1.default, statusRouter_1.default, bookRoute_1.default);
+router.use(readerRoute_1.default);
+router.use(errorHandler_1.errorHandler);
 exports.default = router;
