@@ -1,7 +1,12 @@
 import { Router } from "express";
+import RegisterController from "../app/controllers/registerController";
+import { validationHandler } from "../app/middleware/validationHandler";
+import { registerValidator } from "../app/validators/registerValidator";
 
-const router: Router = Router();
+const readerRouter: Router = Router();
 
-router.route("/");
+readerRouter
+    .route("/register")
+    .post(registerValidator(), validationHandler, RegisterController.register);
 
-export default router;
+export default readerRouter;
