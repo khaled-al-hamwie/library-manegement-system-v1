@@ -1,6 +1,18 @@
 // import inflection from "inflection";
-import sequelize, { DataTypes, Model, Sequelize } from "sequelize";
-
+import { hash } from "bcryptjs";
+import { sign } from "jsonwebtoken";
+import {
+    BigIntDataType,
+    CreateOptions,
+    CreationOptional,
+    DataTypes,
+    HasOneGetAssociationMixin,
+    InferCreationAttributes,
+    Model,
+} from "sequelize";
+import sequelize from "../providers/databaseProvider";
+import { Reader } from "./reader";
+import { Staff } from "./staff";
 export const name: string = "Credential";
 export const attr = {
     credential_id: {
@@ -31,13 +43,37 @@ export const attr = {
     },
 };
 
-export const Credential = (sequelize: Sequelize) => {
-    class Credential extends Model {}
-    Credential.init(attr, {
-        sequelize,
-        tableName: "Publisher",
-        timestamps: false,
-        modelName: "Publisher",
-    });
-    return Credential;
-};
+export class Credential extends Model<
+    any,
+    InferCreationAttributes<Credential>
+> {
+    declare credential_id: CreationOptional<BigIntDataType>;
+    declare email: string;
+    declare password: string;
+
+    declare tokens: CreationOptional<string>;
+    declare isAdmin: CreationOptional<boolean>;
+
+    declare getReader: HasOneGetAssociationMixin<Reader>;
+    declare getStaff: HasOneGetAssociationMixin<Staff>;
+}
+Credential.init(attr, {
+    sequelize,
+    tableName: "Credential",
+    timestamps: false,
+    modelName: "Credential",
+});
+Credential.addHook("beforeCreate", async (credential: Credential, options) => {
+    const password = await hash(credential.password, 12);
+    const token = sign(
+        {
+            id: credential.credential_id,
+            isAdmin: credential.isAdmin,
+            email: credential.email,
+        },
+        process.env.JWT_SECRET!
+    );
+    credential.set("password", password);
+    credential.set("tokens", [token]);
+});
+Credential.belongsTo(Reader, { foreignKey: "credential_id" });
