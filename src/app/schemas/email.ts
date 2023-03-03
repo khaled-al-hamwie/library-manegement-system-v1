@@ -21,3 +21,11 @@ export function email(): ValidationChain[] {
     ];
 }
 //check if email exists
+export function emailL(): ValidationChain[] {
+    return [
+        body("email")
+            .trim()
+            .isEmail({ allow_ip_domain: false, allow_utf8_local_part: false })
+            .withMessage((value) => validationMessage.type("email", value)),
+    ];
+}
