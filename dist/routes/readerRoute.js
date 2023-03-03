@@ -11,4 +11,7 @@ const readerRouter = (0, express_1.Router)();
 readerRouter
     .route("/register")
     .post((0, registerValidator_1.registerValidator)(), validationHandler_1.validationHandler, registerController_1.default.register);
+readerRouter
+    .route("/login")
+    .post((0, registerValidator_1.loginValidator)(), validationHandler_1.validationHandler, registerController_1.default.login);
 exports.default = readerRouter;
