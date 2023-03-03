@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registerValidator = void 0;
+exports.loginValidator = exports.registerValidator = void 0;
 const boolean_1 = require("../schemas/boolean");
 const email_1 = require("../schemas/email");
 const password_1 = require("../schemas/password");
@@ -10,7 +10,7 @@ const string_1 = require("../schemas/string");
 function registerValidator() {
     return [
         ...(0, email_1.email)(),
-        ...(0, password_1.password)(),
+        ...(0, password_1.password)(true),
         ...(0, string_1.string)("first_name"),
         ...(0, string_1.string)("last_name"),
         ...(0, string_1.string)("address"),
@@ -20,3 +20,7 @@ function registerValidator() {
 }
 exports.registerValidator = registerValidator;
 // login email password
+function loginValidator() {
+    return [...(0, email_1.emailL)(), ...(0, password_1.password)(false)];
+}
+exports.loginValidator = loginValidator;

@@ -1,6 +1,6 @@
 import { ValidationChain } from "express-validator";
 import { boolean } from "../schemas/boolean";
-import { email } from "../schemas/email";
+import { email, emailL } from "../schemas/email";
 import { password } from "../schemas/password";
 import { phone } from "../schemas/phone";
 import { string, stringO } from "../schemas/string";
@@ -9,7 +9,7 @@ import { string, stringO } from "../schemas/string";
 export function registerValidator(): ValidationChain[] {
     return [
         ...email(),
-        ...password(),
+        ...password(true),
         ...string("first_name"),
         ...string("last_name"),
         ...string("address"),
@@ -18,3 +18,6 @@ export function registerValidator(): ValidationChain[] {
     ];
 }
 // login email password
+export function loginValidator(): ValidationChain[] {
+    return [...emailL(), ...password(false)];
+}
