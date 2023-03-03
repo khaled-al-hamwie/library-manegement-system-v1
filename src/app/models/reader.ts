@@ -1,5 +1,15 @@
-import sequelize, { DataTypes, Model, Sequelize } from "sequelize";
-
+import {
+    BigIntDataType,
+    CreationOptional,
+    DataTypes,
+    HasOneGetAssociationMixin,
+    HasOneSetAssociationMixin,
+    InferCreationAttributes,
+    IntegerDataType,
+    Model,
+} from "sequelize";
+import sequelize from "../providers/databaseProvider";
+import { Credential } from "./credential";
 export const name: string = "Reader";
 export const attr = {
     reader_id: {
@@ -34,13 +44,20 @@ export const attr = {
     },
 };
 
-export const Reader = (sequelize: Sequelize) => {
-    class Reader extends Model {}
-    Reader.init(attr, {
-        sequelize,
-        tableName: "Reader",
-        timestamps: false,
-        modelName: "Reader",
-    });
-    return Reader;
-};
+export class Reader extends Model<any, InferCreationAttributes<Reader>> {
+    declare reader_id: CreationOptional<IntegerDataType>;
+    declare credential_id: BigIntDataType;
+    declare first_name: string;
+    declare last_name: string;
+    declare address: string;
+    declare phone_number: string;
+
+    declare setCredential: HasOneSetAssociationMixin<Credential, Credential>;
+    declare getCredential: HasOneGetAssociationMixin<Credential>;
+}
+Reader.init(attr, {
+    sequelize,
+    tableName: "Reader",
+    timestamps: false,
+    modelName: "Reader",
+});
