@@ -1,5 +1,5 @@
-import sequelize, { DataTypes, Model, Sequelize } from "sequelize";
-
+import { DataTypes, Model } from "sequelize";
+import sequelize from "../providers/databaseProvider";
 export const name: string = "Staff";
 export const attr = {
     staff_id: {
@@ -34,13 +34,10 @@ export const attr = {
     },
 };
 
-export const Staff = (sequelize: Sequelize) => {
-    class Staff extends Model {}
-    Staff.init(attr, {
-        sequelize,
-        tableName: "Staff",
-        timestamps: false,
-        modelName: "Staff",
-    });
-    return Staff;
-};
+export class Staff extends Model {}
+Staff.init(attr, {
+    sequelize,
+    tableName: "Staff",
+    timestamps: false,
+    modelName: "Staff",
+});
