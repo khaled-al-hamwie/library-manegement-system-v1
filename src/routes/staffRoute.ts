@@ -1,6 +1,6 @@
 import { Router } from "express";
 import StaffController from "../app/controllers/staffController";
-import { authMiddleware } from "../app/middleware/authMiddleware";
+import { adminMiddleware } from "../app/middleware/authMiddleware";
 import { validationHandler } from "../app/middleware/validationHandler";
 import { registerValidator } from "../app/validators/registerValidator";
 import { authorRouterAdmin } from "./sub-routes/authorRoute";
@@ -13,21 +13,21 @@ const staffRouter: Router = Router();
 
 staffRouter.post(
     "/admin/register",
-    authMiddleware,
+    adminMiddleware,
     registerValidator(),
     validationHandler,
     StaffController.createStaff
 );
 
-staffRouter.get("/admin/staff", authMiddleware, StaffController.getStaff);
+staffRouter.get("/admin/staff", adminMiddleware, StaffController.getStaff);
 staffRouter.delete(
     "/admin/staff/:id",
-    authMiddleware,
+    adminMiddleware,
     StaffController.deleteStaff
 );
 staffRouter.use(
     "/admin",
-    authMiddleware,
+    adminMiddleware,
     authorRouterAdmin,
     categoryRouterAdmin,
     bookRouterAdmin,
