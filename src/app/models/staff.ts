@@ -1,4 +1,13 @@
-import { DataTypes, Model } from "sequelize";
+import {
+    BigIntDataType,
+    CreationOptional,
+    DataTypes,
+    HasOneGetAssociationMixin,
+    HasOneSetAssociationMixin,
+    InferCreationAttributes,
+    IntegerDataType,
+    Model,
+} from "sequelize";
 import sequelize from "../providers/databaseProvider";
 export const name: string = "Staff";
 export const attr = {
@@ -34,7 +43,17 @@ export const attr = {
     },
 };
 
-export class Staff extends Model {}
+export class Staff extends Model<any, InferCreationAttributes<Staff>> {
+    declare staff_id: CreationOptional<IntegerDataType>;
+    declare credential_id: BigIntDataType;
+    declare first_name: string;
+    declare last_name: string;
+    declare address: string;
+    declare phone_number: string;
+
+    declare setCredential: HasOneSetAssociationMixin<Credential, Credential>;
+    declare getCredential: HasOneGetAssociationMixin<Credential>;
+}
 Staff.init(attr, {
     sequelize,
     tableName: "Staff",
