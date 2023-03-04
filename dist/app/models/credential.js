@@ -58,13 +58,14 @@ Credential.init(exports.attr, {
 });
 Credential.addHook("beforeCreate", (credential, options) => __awaiter(void 0, void 0, void 0, function* () {
     const password = yield (0, bcryptjs_1.hash)(credential.password, 12);
+    credential.set("password", password);
+}));
+Credential.addHook("afterCreate", (credential, options) => {
     const token = (0, jsonwebtoken_1.sign)({
         id: credential.credential_id,
         isAdmin: credential.isAdmin,
-        email: credential.email,
     }, process.env.JWT_SECRET);
-    credential.set("password", password);
     credential.set("tokens", [token]);
-}));
+});
 // Credential.belongsTo(Reader, { foreignKey: "credential_id" });
 // Credential.belongsTo(Staff, { foreignKey: "staff_id" });

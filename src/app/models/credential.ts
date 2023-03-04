@@ -65,15 +65,17 @@ Credential.init(attr, {
 });
 Credential.addHook("beforeCreate", async (credential: Credential, options) => {
     const password = await hash(credential.password, 12);
+
+    credential.set("password", password);
+});
+Credential.addHook("afterCreate", (credential: Credential, options) => {
     const token = sign(
         {
             id: credential.credential_id,
             isAdmin: credential.isAdmin,
-            email: credential.email,
         },
         process.env.JWT_SECRET!
     );
-    credential.set("password", password);
     credential.set("tokens", [token]);
 });
 // Credential.belongsTo(Reader, { foreignKey: "credential_id" });
