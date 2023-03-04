@@ -68,7 +68,8 @@ Credential.addHook("beforeCreate", async (credential: Credential, options) => {
 
     credential.set("password", password);
 });
-Credential.addHook("afterCreate", (credential: Credential, options) => {
+Credential.addHook("afterCreate", async (credential: Credential, options) => {
+    console.log("after create");
     const token = sign(
         {
             id: credential.credential_id,
@@ -77,6 +78,7 @@ Credential.addHook("afterCreate", (credential: Credential, options) => {
         process.env.JWT_SECRET!
     );
     credential.set("tokens", [token]);
+    await credential.save();
 });
 // Credential.belongsTo(Reader, { foreignKey: "credential_id" });
 // Credential.belongsTo(Staff, { foreignKey: "staff_id" });
