@@ -17,10 +17,12 @@ const credential_1 = require("../models/credential");
 const responses_1 = __importDefault(require("../traits/responses"));
 class RegisterController {
     static register(email, password, isAdmin = false) {
-        return credential_1.Credential.create({
-            email,
-            password,
-            isAdmin,
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield credential_1.Credential.create({
+                email,
+                password,
+                isAdmin,
+            });
         });
     }
     static login(req, res, next) {

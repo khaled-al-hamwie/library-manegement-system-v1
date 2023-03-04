@@ -3,8 +3,12 @@ import { NextFunction, Request, Response } from "express";
 import { Credential } from "../models/credential";
 import HttpResponse from "../traits/responses";
 class RegisterController {
-    static register(email: string, password: string, isAdmin: boolean = false) {
-        return Credential.create({
+    static async register(
+        email: string,
+        password: string,
+        isAdmin: boolean = false
+    ) {
+        return await Credential.create({
             email,
             password,
             isAdmin,
