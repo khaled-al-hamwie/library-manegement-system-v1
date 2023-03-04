@@ -76,4 +76,5 @@ Credential.addHook("beforeCreate", async (credential: Credential, options) => {
     credential.set("password", password);
     credential.set("tokens", [token]);
 });
-Credential.belongsTo(Reader, { foreignKey: "credential_id" });
+// Credential.belongsTo(Reader, { foreignKey: "credential_id" });
+// Credential.belongsTo(Staff, { foreignKey: "staff_id" });

@@ -18,7 +18,6 @@ const bcryptjs_1 = require("bcryptjs");
 const jsonwebtoken_1 = require("jsonwebtoken");
 const sequelize_1 = require("sequelize");
 const databaseProvider_1 = __importDefault(require("../providers/databaseProvider"));
-const reader_1 = require("./reader");
 exports.name = "Credential";
 exports.attr = {
     credential_id: {
@@ -67,4 +66,5 @@ Credential.addHook("beforeCreate", (credential, options) => __awaiter(void 0, vo
     credential.set("password", password);
     credential.set("tokens", [token]);
 }));
-Credential.belongsTo(reader_1.Reader, { foreignKey: "credential_id" });
+// Credential.belongsTo(Reader, { foreignKey: "credential_id" });
+// Credential.belongsTo(Staff, { foreignKey: "staff_id" });
