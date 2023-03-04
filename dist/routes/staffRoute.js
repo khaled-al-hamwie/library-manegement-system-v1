@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const authorRoute_1 = require("./sub-routes/authorRoute");
+const bookRoute_1 = require("./sub-routes/bookRoute");
+const categoryRoute_1 = require("./sub-routes/categoryRoute");
+const publisherRoute_1 = require("./sub-routes/publisherRoute");
+const statusRouter_1 = require("./sub-routes/statusRouter");
+const staffRouter = (0, express_1.Router)();
+staffRouter.use("/admin", authorRoute_1.authorRouterAdmin, categoryRoute_1.categoryRouterAdmin, bookRoute_1.bookRouterAdmin, statusRouter_1.statusRouterAdmin, publisherRoute_1.publisherRouterAdmin);
+exports.default = staffRouter;
