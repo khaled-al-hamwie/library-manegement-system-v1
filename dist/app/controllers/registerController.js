@@ -14,26 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const bcryptjs_1 = require("bcryptjs");
 const credential_1 = require("../models/credential");
-const reader_1 = require("../models/reader");
 const responses_1 = __importDefault(require("../traits/responses"));
 class RegisterController {
-    static register(req, res, next) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const email = req.body.email;
-            const password = req.body.password;
-            let credential = yield credential_1.Credential.create({
-                email: email,
-                password: password,
-            });
-            yield reader_1.Reader.create({
-                credential_id: credential.credential_id,
-                first_name: req.body.first_name,
-                last_name: req.body.last_name,
-                address: req.body.address,
-                phone_number: req.body.phone_number,
-            })
-                .then((results) => responses_1.default.creation(res, { results, token: credential.tokens[0] }, "Reader"))
-                .catch((errors) => responses_1.default.server(res, errors));
+    static register(email, password, isAdmin = false) {
+        return credential_1.Credential.create({
+            email,
+            password,
+            isAdmin,
         });
     }
     static login(req, res, next) {
