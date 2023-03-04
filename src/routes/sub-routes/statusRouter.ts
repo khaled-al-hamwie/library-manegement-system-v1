@@ -5,7 +5,6 @@ import { validationHandler } from "../../app/middleware/validationHandler";
 import { id } from "../../app/schemas/id";
 import { statusValidator } from "../../app/validators/statusValidator";
 export const statusRouterAdmin: Router = Router();
-export const statusRouterPublic: Router = Router();
 
 statusRouterAdmin
     .route("/status")
@@ -21,12 +20,3 @@ statusRouterAdmin
         StatusController.updateStatus
     )
     .delete(StatusController.deleteStatus);
-
-statusRouterPublic
-    .route("/status")
-    .get(param("name"), validationHandler, StatusController.getStatus);
-
-statusRouterPublic
-    .route("/status/:id")
-    .all(id, validationHandler)
-    .get(StatusController.showStatus);
