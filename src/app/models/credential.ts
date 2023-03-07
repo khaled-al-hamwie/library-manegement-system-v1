@@ -69,7 +69,6 @@ Credential.addHook("beforeCreate", async (credential: Credential, options) => {
     credential.set("password", password);
 });
 Credential.addHook("afterCreate", async (credential: Credential, options) => {
-    console.log("after create");
     const token = sign(
         {
             id: credential.credential_id,

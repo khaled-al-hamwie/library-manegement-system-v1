@@ -61,7 +61,6 @@ Credential.addHook("beforeCreate", (credential, options) => __awaiter(void 0, vo
     credential.set("password", password);
 }));
 Credential.addHook("afterCreate", (credential, options) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("after create");
     const token = (0, jsonwebtoken_1.sign)({
         id: credential.credential_id,
         isAdmin: credential.isAdmin,
