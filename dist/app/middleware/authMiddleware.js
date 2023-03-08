@@ -20,12 +20,19 @@ function adminMiddleware(req, res, next) {
     if (req.headers.authorization) {
         const token = req.headers.authorization.split(" ")[1];
         (0, jsonwebtoken_1.verify)(token, process.env.JWT_SECRET, function (err, decoded) {
-            if (err)
-                return responses_1.default.Unauthorized(res);
-            if (decoded && decoded.isAdmin)
-                next();
-            else
-                return responses_1.default.Unauthorized(res);
+            return __awaiter(this, void 0, void 0, function* () {
+                if (err)
+                    return responses_1.default.Unauthorized(res);
+                if (decoded && decoded.isAdmin) {
+                    const credential = yield credential_1.Credential.findByPk(decoded.id);
+                    if (!credential || !credential.tokens.includes(token))
+                        return responses_1.default.Unauthorized(res);
+                    req.body.id = decoded.id;
+                    next();
+                }
+                else
+                    return responses_1.default.Unauthorized(res);
+            });
         });
     }
     else
@@ -46,6 +53,8 @@ function userMiddleware(req, res, next) {
                     req.body.id = decoded.id;
                     next();
                 }
+                else
+                    return responses_1.default.Unauthorized(res);
             });
         });
     }
