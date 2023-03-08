@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { Credential } from "../models/credential";
 import { Reader } from "../models/reader";
 import HttpResponse from "../traits/responses";
 import RegisterController from "./registerController";
@@ -48,23 +49,26 @@ class ReaderController {
         res: Response,
         next: NextFunction
     ): Promise<Response> {
-        return res.json();
+        let reader = await Reader.findOne({
+            where: { credential_id: req.body.id },
+        });
+        if (!reader) return HttpResponse.notExist(res);
+        return HttpResponse.fetch(res, reader);
     }
 
-    static async updateReader(
-        req: Request,
-        res: Response,
-        next: NextFunction
-    ): Promise<Response> {
-        return res.json();
+    static async updateReader(req: Request, res: Response, next: NextFunction) {
+        return res.json("this is sparta update");
     }
 
-    static async deleteReader(
-        req: Request,
-        res: Response,
-        next: NextFunction
-    ): Promise<Response> {
-        return res.json();
+    static async deleteReader(req: Request, res: Response, next: NextFunction) {
+        const reader = await Reader.findOne({
+            where: { credential_id: req.body.id },
+        });
+        const credential = await Credential.findByPk(req.body.id);
+        if (!reader || !credential) return HttpResponse.notExist(res);
+        await reader.destroy();
+        await credential.destroy();
+        return HttpResponse.ok(res);
     }
 }
 export default ReaderController;

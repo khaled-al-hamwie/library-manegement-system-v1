@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const credential_1 = require("../models/credential");
 const reader_1 = require("../models/reader");
 const responses_1 = __importDefault(require("../traits/responses"));
 const registerController_1 = __importDefault(require("./registerController"));
@@ -45,17 +46,30 @@ class ReaderController {
     }
     static showReader(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            return res.json();
+            let reader = yield reader_1.Reader.findOne({
+                where: { credential_id: req.body.id },
+            });
+            if (!reader)
+                return responses_1.default.notExist(res);
+            return responses_1.default.fetch(res, reader);
         });
     }
     static updateReader(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            return res.json();
+            return res.json("this is sparta update");
         });
     }
     static deleteReader(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            return res.json();
+            const reader = yield reader_1.Reader.findOne({
+                where: { credential_id: req.body.id },
+            });
+            const credential = yield credential_1.Credential.findByPk(req.body.id);
+            if (!reader || !credential)
+                return responses_1.default.notExist(res);
+            yield reader.destroy();
+            yield credential.destroy();
+            return responses_1.default.ok(res);
         });
     }
 }
