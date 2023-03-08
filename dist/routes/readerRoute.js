@@ -9,12 +9,14 @@ const authMiddleware_1 = require("../app/middleware/authMiddleware");
 const validationHandler_1 = require("../app/middleware/validationHandler");
 const readerValidator_1 = require("../app/validators/readerValidator");
 const registerValidator_1 = require("../app/validators/registerValidator");
+const reservationRoute_1 = require("./sub-routes/reservationRoute");
 const readerRouter = (0, express_1.Router)();
-readerRouter.post("/register", (0, registerValidator_1.registerValidator)(), validationHandler_1.validationHandler, readerController_1.default.createReader);
-readerRouter
-    .use(authMiddleware_1.userMiddleware)
-    .route("/me")
+const profileRouter = (0, express_1.Router)();
+profileRouter
+    .route("/")
     .get(readerController_1.default.showReader)
     .patch((0, readerValidator_1.readerValidator)(), validationHandler_1.validationHandler, readerController_1.default.updateReader)
     .delete(readerController_1.default.deleteReader);
+readerRouter.post("/register", (0, registerValidator_1.registerValidator)(), validationHandler_1.validationHandler, readerController_1.default.createReader);
+readerRouter.use("/me", authMiddleware_1.userMiddleware, profileRouter, reservationRoute_1.reservationRouterPublic);
 exports.default = readerRouter;

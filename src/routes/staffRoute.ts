@@ -7,6 +7,7 @@ import { authorRouterAdmin } from "./sub-routes/authorRoute";
 import { bookRouterAdmin } from "./sub-routes/bookRoute";
 import { categoryRouterAdmin } from "./sub-routes/categoryRoute";
 import { publisherRouterAdmin } from "./sub-routes/publisherRoute";
+import { reservationRouterAdmin } from "./sub-routes/reservationRoute";
 import { statusRouterAdmin } from "./sub-routes/statusRouter";
 
 const staffRouter: Router = Router();
@@ -32,7 +33,8 @@ staffRouter.use(
     categoryRouterAdmin,
     bookRouterAdmin,
     statusRouterAdmin,
-    publisherRouterAdmin
+    publisherRouterAdmin,
+    reservationRouterAdmin
 );
 
 export default staffRouter;
