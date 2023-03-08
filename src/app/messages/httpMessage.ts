@@ -12,6 +12,9 @@ class httpMessage {
     static notFound(): string {
         return "not found error";
     }
+    static notExists(): string {
+        return "not exists error";
+    }
     static unauthorized(): string {
         return "unauthorized error";
     }

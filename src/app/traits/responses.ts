@@ -27,6 +27,11 @@ class HttpResponse {
             errors: validationMessage.notFound(name, value),
         });
     }
+    static notExist(res: Response): Response {
+        return res.status(404).json({
+            message: httpMessage.notExists(),
+        });
+    }
     static Unauthorized(res: Response): Response {
         return res.status(401).json({
             message: httpMessage.unauthorized(),
