@@ -17,11 +17,6 @@ const reader_1 = require("../models/reader");
 const responses_1 = __importDefault(require("../traits/responses"));
 const registerController_1 = __importDefault(require("./registerController"));
 class ReaderController {
-    static getReader(req, res, next) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return res.json();
-        });
-    }
     static createReader(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const credential = yield registerController_1.default.register(req.body.email, req.body.password, false);
@@ -56,7 +51,26 @@ class ReaderController {
     }
     static updateReader(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            return res.json("this is sparta update");
+            let reader = yield reader_1.Reader.findOne({
+                where: { credential_id: req.body.id },
+            });
+            if (!reader)
+                return responses_1.default.notExist(res);
+            yield reader
+                .update({
+                first_name: req.body.first_name
+                    ? req.body.first_name
+                    : reader.first_name,
+                last_name: req.body.last_name
+                    ? req.body.last_name
+                    : reader.last_name,
+                address: req.body.address ? req.body.address : reader.address,
+                phone_number: req.body.phone_number
+                    ? req.body.phone_number
+                    : reader.phone_number,
+            })
+                .then((result) => responses_1.default.ok(res))
+                .catch((errors) => responses_1.default.server(res, errors));
         });
     }
     static deleteReader(req, res, next) {

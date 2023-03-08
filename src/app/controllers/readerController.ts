@@ -5,14 +5,6 @@ import HttpResponse from "../traits/responses";
 import RegisterController from "./registerController";
 
 class ReaderController {
-    static async getReader(
-        req: Request,
-        res: Response,
-        next: NextFunction
-    ): Promise<Response> {
-        return res.json();
-    }
-
     static async createReader(req: Request, res: Response, next: NextFunction) {
         const credential = await RegisterController.register(
             req.body.email,
@@ -57,7 +49,25 @@ class ReaderController {
     }
 
     static async updateReader(req: Request, res: Response, next: NextFunction) {
-        return res.json("this is sparta update");
+        let reader = await Reader.findOne({
+            where: { credential_id: req.body.id },
+        });
+        if (!reader) return HttpResponse.notExist(res);
+        await reader
+            .update({
+                first_name: req.body.first_name
+                    ? req.body.first_name
+                    : reader.first_name,
+                last_name: req.body.last_name
+                    ? req.body.last_name
+                    : reader.last_name,
+                address: req.body.address ? req.body.address : reader.address,
+                phone_number: req.body.phone_number
+                    ? req.body.phone_number
+                    : reader.phone_number,
+            })
+            .then((result) => HttpResponse.ok(res))
+            .catch((errors) => HttpResponse.server(res, errors));
     }
 
     static async deleteReader(req: Request, res: Response, next: NextFunction) {
