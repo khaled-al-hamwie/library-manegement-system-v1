@@ -9,6 +9,9 @@ const validationMessage_1 = __importDefault(require("../messages/validationMessa
 function dateOnly(title) {
     return [
         (0, express_validator_1.body)(title)
+            .notEmpty()
+            .withMessage(validationMessage_1.default.empty(title))
+            .bail()
             .isDate()
             .withMessage((value) => validationMessage_1.default.type("date", value)),
     ];
