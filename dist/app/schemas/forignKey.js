@@ -16,8 +16,11 @@ exports.forignKeyO = exports.forignKey = void 0;
 const express_validator_1 = require("express-validator");
 const validationMessage_1 = __importDefault(require("../messages/validationMessage"));
 const author_1 = require("../models/author");
+const book_1 = require("../models/book");
 const category_1 = require("../models/category");
 const publisher_1 = require("../models/publisher");
+const reader_1 = require("../models/reader");
+const staff_1 = require("../models/staff");
 const status_1 = require("../models/status");
 function forignKey(field) {
     return [
@@ -66,6 +69,21 @@ function idExist(value, { req, location, path }) {
             const publisher = yield publisher_1.Publisher.findByPk(value);
             if (!publisher)
                 return Promise.reject(validationMessage_1.default.notFound("publisher", value));
+        }
+        else if (path == "book_id") {
+            const book = yield book_1.Book.findByPk(value);
+            if (!book)
+                return Promise.reject(validationMessage_1.default.notFound("book", value));
+        }
+        else if (path == "reader_id") {
+            const reader = yield reader_1.Reader.findByPk(value);
+            if (!reader)
+                return Promise.reject(validationMessage_1.default.notFound("reader", value));
+        }
+        else if (path == "staff_id") {
+            const staff = yield staff_1.Staff.findByPk(value);
+            if (!staff)
+                return Promise.reject(validationMessage_1.default.notFound("staff", value));
         }
     });
 }

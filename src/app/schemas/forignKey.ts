@@ -1,11 +1,21 @@
 import { body, Meta, ValidationChain } from "express-validator";
 import validationMessage from "../messages/validationMessage";
 import { Author } from "../models/author";
+import { Book } from "../models/book";
 import { Category } from "../models/category";
 import { Publisher } from "../models/publisher";
+import { Reader } from "../models/reader";
+import { Staff } from "../models/staff";
 import { Status } from "../models/status";
 
-type forignKeyType = "category_id" | "author_id" | "publisher_id" | "status_id";
+type forignKeyType =
+    | "category_id"
+    | "author_id"
+    | "publisher_id"
+    | "status_id"
+    | "book_id"
+    | "staff_id"
+    | "reader_id";
 export function forignKey(field: forignKeyType): ValidationChain[] {
     return [
         body(field)
@@ -52,5 +62,17 @@ async function idExist(value: any, { req, location, path }: Meta) {
             return Promise.reject(
                 validationMessage.notFound("publisher", value)
             );
+    } else if (path == "book_id") {
+        const book = await Book.findByPk(value);
+        if (!book)
+            return Promise.reject(validationMessage.notFound("book", value));
+    } else if (path == "reader_id") {
+        const reader = await Reader.findByPk(value);
+        if (!reader)
+            return Promise.reject(validationMessage.notFound("reader", value));
+    } else if (path == "staff_id") {
+        const staff = await Staff.findByPk(value);
+        if (!staff)
+            return Promise.reject(validationMessage.notFound("staff", value));
     }
 }
