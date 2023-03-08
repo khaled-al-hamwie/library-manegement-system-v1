@@ -1,5 +1,16 @@
-import sequelize, { DataTypes, Model, Sequelize } from "sequelize";
-
+import {
+    BigIntDataType,
+    CreationOptional,
+    DataTypes,
+    DateDataType,
+    ForeignKey,
+    InferCreationAttributes,
+    Model,
+} from "sequelize";
+import sequelize from "../providers/databaseProvider";
+import { Book } from "./book";
+import { Reader } from "./reader";
+import { Staff } from "./staff";
 export const name: string = "Reservation";
 export const attr = {
     reservation_id: {
@@ -44,13 +55,20 @@ export const attr = {
     },
 };
 
-export const Reservation = (sequelize: Sequelize) => {
-    class Reservation extends Model {}
-    Reservation.init(attr, {
-        sequelize,
-        tableName: "Reservation",
-        timestamps: false,
-        modelName: "Reservation",
-    });
-    return Reservation;
-};
+export class Reservation extends Model<
+    any,
+    InferCreationAttributes<Reservation>
+> {
+    declare reservation_id: CreationOptional<BigIntDataType>;
+    declare book_id: ForeignKey<Book["book_id"]>;
+    declare reader_id: ForeignKey<Reader["reader_id"]>;
+    declare staff_id: ForeignKey<Staff["staff_id"]>;
+    declare reservation_date: DateDataType;
+    declare return_date: DateDataType;
+}
+Reservation.init(attr, {
+    sequelize,
+    tableName: "Reservation",
+    timestamps: false,
+    modelName: "Reservation",
+});
