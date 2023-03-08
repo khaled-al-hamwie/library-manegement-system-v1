@@ -1,13 +1,18 @@
 import { Router } from "express";
 import ReservationController from "../../app/controllers/reservationController";
-import { errorHandler } from "../../app/middleware/errorHandler";
+import { validationHandler } from "../../app/middleware/validationHandler";
+import { reservationValidator } from "../../app/validators/reservationValidator";
 
 export const reservationRouterAdmin: Router = Router();
 export const reservationRouterPublic: Router = Router();
 
 reservationRouterAdmin
     .route("/reservation")
-    .post(errorHandler, ReservationController.createReservation)
+    .post(
+        reservationValidator(),
+        validationHandler,
+        ReservationController.createReservation
+    )
     .get(ReservationController.getReservation);
 
 reservationRouterPublic.get(
