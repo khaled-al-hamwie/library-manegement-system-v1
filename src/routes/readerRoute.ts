@@ -1,21 +1,24 @@
 import { Router } from "express";
 import ReaderController from "../app/controllers/readerController";
-import RegisterController from "../app/controllers/registerController";
-import { adminMiddleware } from "../app/middleware/authMiddleware";
+import { userMiddleware } from "../app/middleware/authMiddleware";
 import { validationHandler } from "../app/middleware/validationHandler";
-import {
-    loginValidator,
-    registerValidator,
-} from "../app/validators/registerValidator";
+import { readerValidator } from "../app/validators/readerValidator";
+import { registerValidator } from "../app/validators/registerValidator";
 
 const readerRouter: Router = Router();
 
+readerRouter.post(
+    "/register",
+    registerValidator(),
+    validationHandler,
+    ReaderController.createReader
+);
+
 readerRouter
-    .route("/register")
-    .post(
-        registerValidator(),
-        validationHandler,
-        ReaderController.createReader
-    );
+    .use(userMiddleware)
+    .route("/me")
+    .get(ReaderController.showReader)
+    .patch(readerValidator(), validationHandler, ReaderController.updateReader)
+    .delete(ReaderController.deleteReader);
 
 export default readerRouter;
