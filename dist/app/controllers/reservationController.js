@@ -12,16 +12,74 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const sequelize_1 = require("sequelize");
+const reader_1 = require("../models/reader");
 const reservation_1 = require("../models/reservation");
 const staff_1 = require("../models/staff");
 const formatDate_1 = require("../traits/formatDate");
 const responses_1 = __importDefault(require("../traits/responses"));
 const bookController_1 = __importDefault(require("./bookController"));
 class ReservationController {
-    //staff
     static getReservation(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            return res.json();
+            let option = req.query.option;
+            let searchQuery = undefined;
+            let start = new Date();
+            let end = new Date();
+            switch (option) {
+                case "today":
+                    start.setHours(0, 0, 0, 0);
+                    end.setHours(23, 59, 59, 59);
+                    searchQuery = {
+                        where: {
+                            return_date: {
+                                [sequelize_1.Op.between]: [start, end],
+                            },
+                        },
+                    };
+                    break;
+                case "yesterday":
+                    start.setHours(0, 0, 0, 0);
+                    start.setDate(start.getDate() - 1);
+                    end.setHours(23, 59, 59, 59);
+                    end.setDate(end.getDate() - 1);
+                    searchQuery = {
+                        where: {
+                            return_date: {
+                                [sequelize_1.Op.between]: [start, end],
+                            },
+                        },
+                    };
+                    break;
+                case "this_week":
+                    start.setHours(0, 0, 0, 0);
+                    end.setHours(23, 59, 59, 59);
+                    end.setDate(end.getDate() + 7);
+                    searchQuery = {
+                        where: {
+                            return_date: {
+                                [sequelize_1.Op.between]: [start, end],
+                            },
+                        },
+                    };
+                    break;
+                case "last_week":
+                    start.setHours(0, 0, 0, 0);
+                    end.setDate(end.getDate() - 7);
+                    end.setHours(23, 59, 59, 59);
+                    searchQuery = {
+                        where: {
+                            return_date: {
+                                [sequelize_1.Op.between]: [start, end],
+                            },
+                        },
+                    };
+                    break;
+                default:
+                    searchQuery = undefined;
+                    break;
+            }
+            return responses_1.default.fetch(res, yield reservation_1.Reservation.findAll(searchQuery));
         });
     }
     //staff
@@ -53,7 +111,12 @@ class ReservationController {
     //reader to see their reservation history
     static showReservation(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            return res.json();
+            const reader = yield reader_1.Reader.findOne({
+                where: { credential_id: req.body.id },
+            });
+            return responses_1.default.fetch(res, yield reservation_1.Reservation.findAll({
+                where: { reader_id: reader === null || reader === void 0 ? void 0 : reader.reader_id },
+            }));
         });
     }
 }

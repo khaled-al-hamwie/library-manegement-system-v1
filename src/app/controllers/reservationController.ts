@@ -1,4 +1,6 @@
 import { NextFunction, Request, Response } from "express";
+import { FindOptions, Op } from "sequelize";
+import { Reader } from "../models/reader";
 import { Reservation } from "../models/reservation";
 import { Staff } from "../models/staff";
 import { formatDate } from "../traits/formatDate";
@@ -6,13 +8,69 @@ import HttpResponse from "../traits/responses";
 import BookController from "./bookController";
 
 class ReservationController {
-    //staff
     static async getReservation(
         req: Request,
         res: Response,
         next: NextFunction
     ): Promise<Response> {
-        return res.json();
+        let option = req.query.option;
+        let searchQuery: FindOptions<any> | undefined = undefined;
+        let start = new Date();
+        let end = new Date();
+        switch (option) {
+            case "today":
+                start.setHours(0, 0, 0, 0);
+                end.setHours(23, 59, 59, 59);
+                searchQuery = {
+                    where: {
+                        return_date: {
+                            [Op.between]: [start, end],
+                        },
+                    },
+                };
+                break;
+            case "yesterday":
+                start.setHours(0, 0, 0, 0);
+                start.setDate(start.getDate() - 1);
+                end.setHours(23, 59, 59, 59);
+                end.setDate(end.getDate() - 1);
+                searchQuery = {
+                    where: {
+                        return_date: {
+                            [Op.between]: [start, end],
+                        },
+                    },
+                };
+                break;
+            case "this_week":
+                start.setHours(0, 0, 0, 0);
+                end.setHours(23, 59, 59, 59);
+                end.setDate(end.getDate() + 7);
+                searchQuery = {
+                    where: {
+                        return_date: {
+                            [Op.between]: [start, end],
+                        },
+                    },
+                };
+                break;
+            case "last_week":
+                start.setHours(0, 0, 0, 0);
+                end.setDate(end.getDate() - 7);
+                end.setHours(23, 59, 59, 59);
+                searchQuery = {
+                    where: {
+                        return_date: {
+                            [Op.between]: [start, end],
+                        },
+                    },
+                };
+                break;
+            default:
+                searchQuery = undefined;
+                break;
+        }
+        return HttpResponse.fetch(res, await Reservation.findAll(searchQuery));
     }
     //staff
     static async createReservation(
@@ -48,7 +106,15 @@ class ReservationController {
         res: Response,
         next: NextFunction
     ): Promise<Response> {
-        return res.json();
+        const reader = await Reader.findOne({
+            where: { credential_id: req.body.id },
+        });
+        return HttpResponse.fetch(
+            res,
+            await Reservation.findAll({
+                where: { reader_id: reader?.reader_id },
+            })
+        );
     }
 }
 export default ReservationController;
