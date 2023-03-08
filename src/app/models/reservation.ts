@@ -63,8 +63,8 @@ export class Reservation extends Model<
     declare book_id: ForeignKey<Book["book_id"]>;
     declare reader_id: ForeignKey<Reader["reader_id"]>;
     declare staff_id: ForeignKey<Staff["staff_id"]>;
-    declare reservation_date: DateDataType;
-    declare return_date: DateDataType;
+    declare reservation_date: string;
+    declare return_date: string;
 }
 Reservation.init(attr, {
     sequelize,
