@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-import fs from "fs";
-import path from "path";
 import { Op } from "sequelize";
 import { Book } from "../models/book";
 import HttpResponse from "../traits/responses";
 import saveImage from "../traits/saveImage";
+
+type status = "available" | "rented" | "sold";
 class BookController {
     static async getBooks(
         req: Request,
@@ -148,6 +148,21 @@ class BookController {
             return HttpResponse.ok(res);
         }
         return HttpResponse.notFound(res, "book", id);
+    }
+
+    static async isAvailable(book_id: number): Promise<boolean> {
+        let book = await Book.findByPk(book_id);
+        if (Number(book?.status_id) == 2) return true;
+        return false;
+    }
+
+    static async updateStatus(book_id: number, status: status) {
+        let book = await Book.findByPk(book_id);
+        let status_id = status == "rented" ? 3 : status == "sold" ? 1 : 2;
+        if (book) {
+            book.set("status_id", status_id);
+            book.save();
+        } else return new Error("something wrong happend");
     }
 }
 export default BookController;

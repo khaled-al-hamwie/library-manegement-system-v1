@@ -154,5 +154,25 @@ class BookController {
             return responses_1.default.notFound(res, "book", id);
         });
     }
+    static isAvailable(book_id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let book = yield book_1.Book.findByPk(book_id);
+            if (Number(book === null || book === void 0 ? void 0 : book.status_id) == 2)
+                return true;
+            return false;
+        });
+    }
+    static updateStatus(book_id, status) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let book = yield book_1.Book.findByPk(book_id);
+            let status_id = status == "rented" ? 3 : status == "sold" ? 1 : 2;
+            if (book) {
+                book.set("status_id", status_id);
+                book.save();
+            }
+            else
+                return new Error("something wrong happend");
+        });
+    }
 }
 exports.default = BookController;
