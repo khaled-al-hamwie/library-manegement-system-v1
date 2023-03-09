@@ -25,7 +25,9 @@ export function paymentValidator(): ValidationChain[] {
                         `the values of book [${typeError}] are not a valid id`
                     );
                 let books = await Book.findAll({
-                    where: { book_id: { [Op.in]: id } },
+                    where: {
+                        [Op.and]: { book_id: { [Op.in]: id }, status_id: 2 },
+                    },
                 });
                 if (books.length < id.length) {
                     let books_id = books.map((book) => {
@@ -33,7 +35,7 @@ export function paymentValidator(): ValidationChain[] {
                     });
                     let r = id.filter((val) => !books_id.includes(val));
                     return Promise.reject(
-                        `the books with the id's [${r}] don't exists`
+                        `the books with the id's [${r}] don't exists or not available in the current time`
                     );
                 }
                 return Promise.resolve();

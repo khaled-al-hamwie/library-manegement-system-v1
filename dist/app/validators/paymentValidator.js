@@ -39,14 +39,16 @@ function paymentValidator() {
             if (typeError.length > 0)
                 return Promise.reject(`the values of book [${typeError}] are not a valid id`);
             let books = yield book_1.Book.findAll({
-                where: { book_id: { [sequelize_1.Op.in]: id } },
+                where: {
+                    [sequelize_1.Op.and]: { book_id: { [sequelize_1.Op.in]: id }, status_id: 2 },
+                },
             });
             if (books.length < id.length) {
                 let books_id = books.map((book) => {
                     return Number(book.book_id);
                 });
                 let r = id.filter((val) => !books_id.includes(val));
-                return Promise.reject(`the books with the id's [${r}] don't exists`);
+                return Promise.reject(`the books with the id's [${r}] don't exists or not available in the current time`);
             }
             return Promise.resolve();
         })),
