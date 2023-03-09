@@ -1,4 +1,15 @@
-import sequelize, { DataTypes, Model, Sequelize } from "sequelize";
+import {
+    BigIntDataType,
+    CreationOptional,
+    DataTypes,
+    ForeignKey,
+    InferCreationAttributes,
+    Model,
+} from "sequelize";
+import sequelize from "../providers/databaseProvider";
+import { Book } from "./book";
+import { Reader } from "./reader";
+import { Staff } from "./staff";
 
 export const name: string = "Payment";
 export const attr = {
@@ -39,13 +50,16 @@ export const attr = {
     },
 };
 
-export const Payment = (sequelize: Sequelize) => {
-    class Payment extends Model {}
-    Payment.init(attr, {
-        sequelize,
-        tableName: "Payment",
-        timestamps: false,
-        modelName: "Payment",
-    });
-    return Payment;
-};
+export class Payment extends Model<any, InferCreationAttributes<Payment>> {
+    declare payment_id: CreationOptional<BigIntDataType>;
+    declare book_id: ForeignKey<Book["book_id"]>;
+    declare reader_id: ForeignKey<Reader["reader_id"]>;
+    declare staff_id: ForeignKey<Staff["staff_id"]>;
+    declare payment_date: string;
+}
+Payment.init(attr, {
+    sequelize,
+    tableName: "Payment",
+    timestamps: false,
+    modelName: "Payment",
+});
