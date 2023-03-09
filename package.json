@@ -11,7 +11,7 @@
     "m": "npx sequelize db:migrate",
     "unm": "sequelize db:migrate:undo:all",
     "seed": "npx sequelize-cli db:seed:all",
-    "unseed": "npx sequelize-cli db:seed:undo"
+    "unseed": "npx sequelize-cli db:seed:undo:all"
   },
   "keywords": [],
   "author": "",
