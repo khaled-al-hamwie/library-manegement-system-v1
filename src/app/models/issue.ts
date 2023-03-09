@@ -1,5 +1,5 @@
-import sequelize, { DataTypes, Model, Sequelize } from "sequelize";
-
+import { DataTypes, Model, Optional } from "sequelize";
+import sequelize from "../providers/databaseProvider";
 export const name: string = "Issue";
 export const attr = {
     issue_id: {
@@ -17,14 +17,24 @@ export const attr = {
         allowNull: true,
     },
 };
-
-export const Issue = (sequelize: Sequelize) => {
-    class Issue extends Model {}
-    Issue.init(attr, {
-        sequelize,
-        tableName: "Issue",
-        timestamps: false,
-        modelName: "Issue",
-    });
-    return Issue;
-};
+interface IssueAttributes {
+    issue_id: number;
+    type: string;
+    description?: string;
+}
+interface IssueInput extends Optional<IssueAttributes, "issue_id"> {}
+interface IssueOutput extends Required<IssueAttributes> {}
+export class Issue
+    extends Model<IssueAttributes, IssueInput>
+    implements IssueAttributes
+{
+    public issue_id!: number;
+    public type!: string;
+    public description!: string;
+}
+Issue.init(attr, {
+    sequelize,
+    tableName: "Issue",
+    timestamps: false,
+    modelName: "Issue",
+});
