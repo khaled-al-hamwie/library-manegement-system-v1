@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { FindOptions, Op } from "sequelize";
+import { Book } from "../models/book";
 import { Payment } from "../models/payment";
+import { Sold } from "../models/sold";
 import { Staff } from "../models/staff";
 import { formatDate } from "../traits/formatDate";
 import HttpResponse from "../traits/responses";
@@ -77,28 +79,35 @@ class PaymentController {
         res: Response,
         next: NextFunction
     ) {
-        let isAvailable = true;
-        await BookController.isAvailable(Number(req.body.book_id)).then(
-            (result) => {
-                if (!result) {
-                    isAvailable = false;
-                }
-            }
-        );
-        if (!isAvailable) return res.json({ messge: "the book is unavilable" });
-
         let staff = await Staff.findOne({
             where: { credential_id: req.body.id },
         });
+        let books = await Book.findAll({
+            where: { book_id: { [Op.in]: req.body.books } },
+        });
+        let total_price = 0;
+        books.forEach((book) => {
+            total_price += Number(book.price);
+        });
         await Payment.create({
             staff_id: staff?.staff_id,
-            book_id: req.body.book_id,
             reader_id: req.body.reader_id,
             payment_date: new Date().toString(),
+            payment_total: total_price,
         })
-            .then((result) => {
-                BookController.updateStatus(Number(req.body.book_id), "sold");
-                return HttpResponse.creation(res, result, "reservation");
+            .then(async (result) => {
+                // BookController.updateStatus(Number(req.body.book_id), "sold");
+                books.forEach(async (book) => {
+                    await Sold.create({
+                        payment_id: Number(result.payment_id),
+                        book_id: Number(book.book_id),
+                    });
+                    await BookController.updateStatus(
+                        Number(book.book_id),
+                        "sold"
+                    );
+                });
+                return HttpResponse.creation(res, result, "payment");
             })
             .catch((err) => HttpResponse.server(res, err));
     }
