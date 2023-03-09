@@ -85,10 +85,13 @@ class ReservationController {
     //staff
     static createReservation(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            bookController_1.default.isAvailable(Number(req.body.book_id)).then((result) => {
+            let isAvailable = true;
+            yield bookController_1.default.isAvailable(Number(req.body.book_id)).then((result) => {
                 if (!result)
-                    return res.json({ messge: "the book is unavilable" });
+                    isAvailable = false;
             });
+            if (!isAvailable)
+                return res.json({ messge: "the book is unavilable" });
             let return_date = new Date();
             return_date.setDate(new Date().getDate() + Number(req.body.day));
             let staff = yield staff_1.Staff.findOne({

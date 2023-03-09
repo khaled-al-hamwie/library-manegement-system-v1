@@ -78,9 +78,14 @@ class ReservationController {
         res: Response,
         next: NextFunction
     ) {
-        BookController.isAvailable(Number(req.body.book_id)).then((result) => {
-            if (!result) return res.json({ messge: "the book is unavilable" });
-        });
+        let isAvailable = true;
+        await BookController.isAvailable(Number(req.body.book_id)).then(
+            (result) => {
+                if (!result) isAvailable = false;
+            }
+        );
+
+        if (!isAvailable) return res.json({ messge: "the book is unavilable" });
 
         let return_date = new Date();
         return_date.setDate(new Date().getDate() + Number(req.body.day));
