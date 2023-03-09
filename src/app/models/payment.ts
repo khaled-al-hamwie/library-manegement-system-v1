@@ -19,14 +19,6 @@ export const attr = {
         autoIncrement: true,
         allowNull: false,
     },
-    book_id: {
-        type: DataTypes.MEDIUMINT,
-        allowNull: false,
-        references: {
-            model: "Book",
-            key: "book_id",
-        },
-    },
     reader_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -48,14 +40,21 @@ export const attr = {
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
+    payment_total: {
+        type: DataTypes.DECIMAL(9, 2),
+        allowNull: false,
+        validate: {
+            min: 0,
+        },
+    },
 };
 
 export class Payment extends Model<any, InferCreationAttributes<Payment>> {
     declare payment_id: CreationOptional<BigIntDataType>;
-    declare book_id: ForeignKey<Book["book_id"]>;
     declare reader_id: ForeignKey<Reader["reader_id"]>;
     declare staff_id: ForeignKey<Staff["staff_id"]>;
     declare payment_date: string;
+    declare payment_total: number;
 }
 Payment.init(attr, {
     sequelize,

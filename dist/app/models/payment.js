@@ -14,14 +14,6 @@ exports.attr = {
         autoIncrement: true,
         allowNull: false,
     },
-    book_id: {
-        type: sequelize_1.DataTypes.MEDIUMINT,
-        allowNull: false,
-        references: {
-            model: "Book",
-            key: "book_id",
-        },
-    },
     reader_id: {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
@@ -42,6 +34,13 @@ exports.attr = {
         type: sequelize_1.DataTypes.DATE,
         allowNull: false,
         defaultValue: sequelize_1.DataTypes.NOW,
+    },
+    payment_total: {
+        type: sequelize_1.DataTypes.DECIMAL(9, 2),
+        allowNull: false,
+        validate: {
+            min: 0,
+        },
     },
 };
 class Payment extends sequelize_1.Model {
