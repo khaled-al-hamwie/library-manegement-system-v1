@@ -6,6 +6,7 @@ import { registerValidator } from "../app/validators/registerValidator";
 import { authorRouterAdmin } from "./sub-routes/authorRoute";
 import { bookRouterAdmin } from "./sub-routes/bookRoute";
 import { categoryRouterAdmin } from "./sub-routes/categoryRoute";
+import { paymentRouterAdmin } from "./sub-routes/paymentRoute";
 import { publisherRouterAdmin } from "./sub-routes/publisherRoute";
 import { reservationRouterAdmin } from "./sub-routes/reservationRoute";
 import { statusRouterAdmin } from "./sub-routes/statusRouter";
@@ -34,7 +35,8 @@ staffRouter.use(
     bookRouterAdmin,
     statusRouterAdmin,
     publisherRouterAdmin,
-    reservationRouterAdmin
+    reservationRouterAdmin,
+    paymentRouterAdmin
 );
 
 export default staffRouter;

@@ -4,6 +4,7 @@ import { userMiddleware } from "../app/middleware/authMiddleware";
 import { validationHandler } from "../app/middleware/validationHandler";
 import { readerValidator } from "../app/validators/readerValidator";
 import { registerValidator } from "../app/validators/registerValidator";
+import { paymentRouterPublic } from "./sub-routes/paymentRoute";
 import { reservationRouterPublic } from "./sub-routes/reservationRoute";
 
 const readerRouter: Router = Router();
@@ -21,6 +22,12 @@ readerRouter.post(
     ReaderController.createReader
 );
 
-readerRouter.use("/me", userMiddleware, profileRouter, reservationRouterPublic);
+readerRouter.use(
+    "/me",
+    userMiddleware,
+    profileRouter,
+    reservationRouterPublic,
+    paymentRouterPublic
+);
 
 export default readerRouter;
