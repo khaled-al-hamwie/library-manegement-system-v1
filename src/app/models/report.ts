@@ -73,7 +73,7 @@ interface ReportAttributes {
     reservation_id?: number;
     payment_id?: number;
     report?: string;
-    date: Date;
+    date?: Date;
 }
 interface ReportInput extends Optional<ReportAttributes, "report_id"> {}
 export class Report
@@ -87,7 +87,7 @@ export class Report
     public issue_id!: number;
     public reservation_id?: number | undefined;
     public payment_id?: number | undefined;
-    public date!: Date;
+    public date?: Date;
 }
 Report.init(attr, {
     sequelize,
