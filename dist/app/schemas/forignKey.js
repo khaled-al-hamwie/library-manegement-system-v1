@@ -18,8 +18,11 @@ const validationMessage_1 = __importDefault(require("../messages/validationMessa
 const author_1 = require("../models/author");
 const book_1 = require("../models/book");
 const category_1 = require("../models/category");
+const issue_1 = require("../models/issue");
+const payment_1 = require("../models/payment");
 const publisher_1 = require("../models/publisher");
 const reader_1 = require("../models/reader");
+const reservation_1 = require("../models/reservation");
 const staff_1 = require("../models/staff");
 const status_1 = require("../models/status");
 function forignKey(field) {
@@ -84,6 +87,21 @@ function idExist(value, { req, location, path }) {
             const staff = yield staff_1.Staff.findByPk(value);
             if (!staff)
                 return Promise.reject(validationMessage_1.default.notFound("staff", value));
+        }
+        else if (path == "issue_id") {
+            const issue = yield issue_1.Issue.findByPk(value);
+            if (!issue)
+                return Promise.reject(validationMessage_1.default.notFound("issue", value));
+        }
+        else if (path == "reservation_id") {
+            const reservation = yield reservation_1.Reservation.findByPk(value);
+            if (!reservation)
+                return Promise.reject(validationMessage_1.default.notFound("staff", value));
+        }
+        else if (path == "payment_id") {
+            const payment = yield payment_1.Payment.findByPk(value);
+            if (!payment)
+                return Promise.reject(validationMessage_1.default.notFound("payment", value));
         }
     });
 }
