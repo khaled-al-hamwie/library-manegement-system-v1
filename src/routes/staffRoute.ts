@@ -9,6 +9,7 @@ import { categoryRouterAdmin } from "./sub-routes/categoryRoute";
 import { issueRouterAdmin } from "./sub-routes/issueRoute";
 import { paymentRouterAdmin } from "./sub-routes/paymentRoute";
 import { publisherRouterAdmin } from "./sub-routes/publisherRoute";
+import { reportRouterAdmin } from "./sub-routes/reportRoute";
 import { reservationRouterAdmin } from "./sub-routes/reservationRoute";
 import { statusRouterAdmin } from "./sub-routes/statusRouter";
 
@@ -38,7 +39,8 @@ staffRouter.use(
     publisherRouterAdmin,
     reservationRouterAdmin,
     paymentRouterAdmin,
-    issueRouterAdmin
+    issueRouterAdmin,
+    reportRouterAdmin
 );
 
 export default staffRouter;
