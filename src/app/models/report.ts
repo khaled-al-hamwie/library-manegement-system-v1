@@ -1,5 +1,5 @@
-import sequelize, { DataTypes, Model, Sequelize } from "sequelize";
-
+import { DataTypes, Model, Optional } from "sequelize";
+import sequelize from "../providers/databaseProvider";
 export const name: string = "Report";
 export const attr = {
     report_id: {
@@ -64,14 +64,34 @@ export const attr = {
         defaultValue: DataTypes.NOW,
     },
 };
-
-export const Report = (sequelize: Sequelize) => {
-    class Report extends Model {}
-    Report.init(attr, {
-        sequelize,
-        tableName: "Report",
-        timestamps: false,
-        modelName: "Report",
-    });
-    return Report;
-};
+interface ReportAttributes {
+    report_id: number;
+    book_id: number;
+    reader_id: number;
+    staff_id: number;
+    issue_id: number;
+    reservation_id?: number;
+    payment_id?: number;
+    report?: string;
+    date: Date;
+}
+interface ReportInput extends Optional<ReportAttributes, "report_id"> {}
+export class Report
+    extends Model<ReportAttributes, ReportInput>
+    implements ReportAttributes
+{
+    public report_id!: number;
+    public book_id!: number;
+    public reader_id!: number;
+    public staff_id!: number;
+    public issue_id!: number;
+    public reservation_id?: number | undefined;
+    public payment_id?: number | undefined;
+    public date!: Date;
+}
+Report.init(attr, {
+    sequelize,
+    tableName: "Report",
+    timestamps: false,
+    modelName: "Report",
+});
