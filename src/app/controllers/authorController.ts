@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { validationResult } from "express-validator";
-import { Op } from "sequelize";
+import { Op, where } from "sequelize";
 import { Author } from "../models/author";
+import { Book } from "../models/book";
 import sequelize from "../providers/databaseProvider";
 import HttpResponse from "../traits/responses";
 
@@ -36,11 +37,18 @@ class AuthorController {
 
     static async showAuthor(req: Request, res: Response, next: NextFunction) {
         await Author.findByPk(req.params.id)
-            .then((results) => {
+            .then(async (results) => {
                 if (results == null) {
                     return HttpResponse.notFound(res, "author", req.params.id);
                 }
-                return HttpResponse.fetch(res, results);
+                return HttpResponse.fetch(res, [
+                    results,
+                    {
+                        books: await Book.findAll({
+                            where: { author_id: req.params.id },
+                        }),
+                    },
+                ]);
             })
             .catch((errors) => HttpResponse.server(res, errors));
     }

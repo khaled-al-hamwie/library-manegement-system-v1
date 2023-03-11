@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const author_1 = require("../models/author");
+const book_1 = require("../models/book");
 const responses_1 = __importDefault(require("../traits/responses"));
 class AuthorController {
     static getAuthor(req, res, next) {
@@ -43,12 +44,19 @@ class AuthorController {
     static showAuthor(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             yield author_1.Author.findByPk(req.params.id)
-                .then((results) => {
+                .then((results) => __awaiter(this, void 0, void 0, function* () {
                 if (results == null) {
                     return responses_1.default.notFound(res, "author", req.params.id);
                 }
-                return responses_1.default.fetch(res, results);
-            })
+                return responses_1.default.fetch(res, [
+                    results,
+                    {
+                        books: yield book_1.Book.findAll({
+                            where: { author_id: req.params.id },
+                        }),
+                    },
+                ]);
+            }))
                 .catch((errors) => responses_1.default.server(res, errors));
         });
     }
