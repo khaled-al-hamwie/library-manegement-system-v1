@@ -10,39 +10,42 @@ our app is design to be used by :
 
 - the library staff member
 - the people how love to read
-## Features 
+
+## Features
 
 ### Staff
 
 the staff can :
 
-- add user to the system 
-- add other staff member 
-- add, update, delete books to/from the library 
+- add user to the system
+- add other staff member
+- add, update, delete books to/from the library
 - add, update, delete authors to/from the library
 - add, update, delete publisher to/from the library
-- manage book reservation 
-- manage the payment process of the book 
+- manage book reservation
+- manage the payment process of the book
 - handle the issue and reports of the user
 
-###  Reader
+### Reader
 
 and our reader can :
 
-- find books to read 
-- add books to favorite 
+- find books to read
+- add books to favorite
 - find his favorite authors and Publishers
-- make book reservation 
-- buy books 
-- report an issue or a problem 
+- make book reservation
+- buy books
+- report an issue or a problem
 
-## use case diagram 
+## use case diagram
 
 and here is a use case diagram that show each user what he can do
 
+![use case diagram](./extra/use-case-diagram.png)
+
 ## ERD
 
-and here is the ERD that show how we design the database 
+you can find the erd inside the extra and open them insid [mysql workbench](https://www.mysql.com/products/workbench/)
 
 ## setting up
 
@@ -51,7 +54,7 @@ before you start make sure you have
 - node js, you can check that using `node -v`
 - mysql database running on your device
 
-### now to start you should :
+### now to start you should
 
 - run `npm i` to install the required library
 - go to config folder and rename the  example.env to .env and set up your database credential and add your own JWT secret
