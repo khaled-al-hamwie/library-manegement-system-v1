@@ -1,0 +1,1164 @@
+{
+	"info": {
+		"_postman_id": "60cd75dc-fdbe-4ca1-a9fc-c5d4c179b5ad",
+		"name": "Staff",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Get All Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/admin/category",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create A Category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\":\"te\",\r\n    \"name\":\"test test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/category",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get A Category",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/category/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update A Category",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"this is m\",\r\n    \"description\":\"hello m\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/category/40",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"category",
+								"40"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"this is sparta\",\r\n    \"description\":\"hello sparta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/category/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"category",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "Get All Book",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/admin/book",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create A Book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/khaled/Documents/books/novels/And Then There Were None ( PDFDrive ).mobi"
+								},
+								{
+									"key": "title",
+									"value": "harry poter",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "14",
+									"type": "text"
+								},
+								{
+									"key": "author_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "publisher_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "status_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "harry poter is one of the grates books of all time it is a story about a boy in the magic word",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "20",
+									"type": "text"
+								},
+								{
+									"key": "reservation_price",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/admin/book",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get A Book",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/book/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"book",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update A Book",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "no gg",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/admin/book/19",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"book",
+								"19"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Book",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"this is sparta\",\r\n    \"description\":\"hello sparta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/book/12",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"book",
+								"12"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Publisher",
+			"item": [
+				{
+					"name": "Get All Publisher",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/admin/publisher",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"publisher"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create A Publisher",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"khaled\",\r\n    \"publishing_date\":\"2020-11-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/publisher",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"publisher"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get A Publisher",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/publisher/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"publisher",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update A Publisher",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"this is sparta\",\r\n    \"year_of_publish\":\"2020/01/21\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/publisher/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"publisher",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Publisher",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"this is sparta\",\r\n    \"description\":\"hello sparta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/publisher/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"publisher",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Status",
+			"item": [
+				{
+					"name": "Get All Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/admin/status",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create A Status",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"status\",\r\n    \"year_of_publish\":\"2020-11-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/status",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get A Status",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/status/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"status",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update A Status",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"this is sparta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/status/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"status",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Status",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"this is sparta\",\r\n    \"description\":\"hello sparta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/status/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"status",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Issue",
+			"item": [
+				{
+					"name": "Get All Issue",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/admin/issue",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"issue"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "book",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create An Issue",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\":\"an employe miss behave\",\r\n    \"year_of_publish\":\"2020-11-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/issue",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"issue"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update An Issue",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\":\"this is sparta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/issue/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"issue",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete An Issue",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"this is sparta\",\r\n    \"description\":\"hello sparta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/issue/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"issue",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Author",
+			"item": [
+				{
+					"name": "Get All Author",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/admin/author",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"author"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create an Author",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"name\":\"john white\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/author",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"author"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get an Author",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/author/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"author",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an Author",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"aa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/author/54a",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"author",
+								"54a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an Author",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"this is sparta\",\r\n    \"description\":\"hello sparta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/author/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"author",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Register",
+			"item": [
+				{
+					"name": "Register A Staff",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code==201){\r",
+									"    pm.environment.set('authToken',pm.response.json().result.token)\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"test28@test.com\",\r\n    \"first_name\":\"khaled\",\r\n    \"last_name\":\"hamwie\",\r\n    \"address\":\"syria\",\r\n    \"password\":\"12312121212121212345\",\r\n    \"confirm_password\":\"12312121212121212345\",\r\n    \"phone_number\":\"1111124\",\r\n    \"phone_number\":\"091242\",\r\n    \"isAdmin\":\"false\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{authToken}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Staff",
+			"item": [
+				{
+					"name": "Get Staff",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/admin/staff",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"staff"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Staff",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/admin/staff/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"staff",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reservation",
+			"item": [
+				{
+					"name": "Create Reservation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"book_id\":1,\r\n    \"reader_id\":2,\r\n    \"day\":\"20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/reservation",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"reservation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Reservation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/admin/reservation?option=yesterday",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"reservation"
+							],
+							"query": [
+								{
+									"key": "option",
+									"value": "yesterday"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payment",
+			"item": [
+				{
+					"name": "Create Payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"books\":[1,2],\r\n    \"reader_id\":2,\r\n    \"day\":\"20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/payment",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Payment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/admin/payment?option=today",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"payment"
+							],
+							"query": [
+								{
+									"key": "option",
+									"value": "today"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Report",
+			"item": [
+				{
+					"name": "Create A Report",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"reader_id\":2,\r\n    \"book_id\":1,\r\n    \"issue_id\":1,\r\n    \"report\":\"one of the client through the book on a stafj\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/report",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Reports",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/admin/report?option=today",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"report"
+							],
+							"query": [
+								{
+									"key": "option",
+									"value": "today"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{authToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
