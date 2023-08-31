@@ -47,6 +47,11 @@ and here is a use case diagram that show each user what he can do
 
 you can find the erd inside the extra and open them insid [mysql workbench](https://www.mysql.com/products/workbench/)
 
+## stack used
+
+- we used Node js [Node js](https://nodejs.org/dist/latest-v18.x/docs/api/documentation.html) version 18.16.0 with Express js [express.js](https://expressjs.com/) and with typeScript [Typescript](https://www.typescriptlang.org/)
+- [sequelize](https://sequelize.org/docs/v6/getting-started/) as ORM to interact with [Mysql database](https://dev.mysql.com/doc/)
+
 ## setting up
 
 before you start make sure you have
